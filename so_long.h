@@ -59,6 +59,11 @@ typedef struct s_image
 	int		bpp;
 	int		length;
 	int		endian;
+	int		width;
+	int		height;
 }			t_image;
+
+void	add_image(t_image *image);
+void	repaint(t_frame *frame);
 
 #endif
