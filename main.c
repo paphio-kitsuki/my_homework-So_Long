@@ -6,7 +6,7 @@
 /*   By: kitsuki <kitsuki@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:09:04 by kitsuki           #+#    #+#             */
-/*   Updated: 2023/02/12 02:10:19 by kitsuki          ###   ########.fr       */
+/*   Updated: 2023/02/12 02:12:27 by kitsuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	exit_func(int button, t_frame *param)
 {
 	mlx_destroy_display(param->mlx);
 	mlx_destroy_window(param->mlx, param->win);
-	ft_lstclear(param->list, delete_object);
+	ft_lstclear(&param->list, delete_object);
 	free(param);
 }
 
@@ -25,7 +25,7 @@ int	key_notify(int button, int x, int y, t_frame *param)
 	printf("%d\n", button);
 	if (button == ESCAPE)
 		exit_func(button, param);
-	if (button == A || button == LEFT)
+	else if (button == A || button == LEFT)
 		param->list->content->x -= 10;
 	else if (button == D || button == RIGHT)
 		param->list->content->x += 10;
@@ -33,6 +33,7 @@ int	key_notify(int button, int x, int y, t_frame *param)
 		param->list->content->y -= 10;
 	else if (button == S || button == DOWN)
 		param->list->content->y += 10;
+	repaint(param);
 }
 
 int	main(void)
