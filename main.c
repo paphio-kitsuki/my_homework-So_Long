@@ -12,19 +12,25 @@
 
 #include "so_long.h"
 
-int	exit_func(int button, t_frame *param)
+t_frame	*frame;
+
+int	exit_func(t_frame *param)
 {
+	printf("www");
 	mlx_destroy_display(param->mlx);
 	mlx_destroy_window(param->mlx, param->win);
 	ft_lstclear(&param->list, delete_object);
 	free(param);
+	return (0);
 }
 
-int	key_notify(int button, int x, int y, t_frame *param)
+int	key_notify(int button, t_frame *param)
 {
-	printf("%p\n", param->list->content);
+	//printf("%p\n", param->list->content);
+	if (param->list == NULL)
+		return (-1);
 	if (button == ESCAPE)
-		exit_func(button, param);
+		exit_func(param);
 	else if (button == A || button == LEFT)
 		param->list->content->x -= 10;
 	else if (button == D || button == RIGHT)
@@ -33,12 +39,12 @@ int	key_notify(int button, int x, int y, t_frame *param)
 		param->list->content->y -= 10;
 	else if (button == S || button == DOWN)
 		param->list->content->y += 10;
+	repaint(param);
+	return (0);
 }
 
 int	main(void)
 {
-	t_frame	*frame;
-
 	frame = (t_frame *)malloc(sizeof(t_frame));
 	frame->mlx = mlx_init();
 	frame->win = mlx_new_window(frame->mlx, 500, 500, "mlx 42");
