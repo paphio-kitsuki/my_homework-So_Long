@@ -6,7 +6,7 @@
 /*   By: kitsuki <kitsuki@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:09:04 by kitsuki           #+#    #+#             */
-/*   Updated: 2023/02/12 02:39:02 by kitsuki          ###   ########.fr       */
+/*   Updated: 2023/02/12 02:43:10 by kitsuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	exit_func(int button, t_frame *param)
 
 int	key_notify(int button, int x, int y, t_frame *param)
 {
-	printf("%d\n", button);
+	printf("%p\n", param->list->content);
 	if (button == ESCAPE)
 		exit_func(button, param);
 	else if (button == A || button == LEFT)
