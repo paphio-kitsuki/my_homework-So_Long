@@ -64,6 +64,6 @@ typedef struct s_image
 }			t_image;
 
 void	add_image(t_image *image);
-void	repaint(t_frame *frame);
+int		repaint(t_frame *frame);
 
 #endif
