@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_image.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitsuki <kitsuki@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: kitsuki </var/mail/kitsuki>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/11 17:45:21 by kitsuki           #+#    #+#             */
-/*   Updated: 2023/02/11 17:45:21 by kitsuki          ###   ########.fr       */
+/*   Created: 2022/07/13 19:39:12 by kitsuki           #+#    #+#             */
+/*   Updated: 2022/07/14 10:17:34 by kitsuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	put_pixel(t_image *image, int x, int y, UINT color)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	char	*tmp;
-
-	if (image == NULL || image->url == NULL)
+	if (lst == NULL || new == NULL)
 		return ;
-	tmp = image->url + (y * image->length + x * (image->bpp / 8));
-	*(UINT *)tmp = color;
-}
-
-void	draw_image()
-{
+	new->next = *lst;
+	*lst = new;
 }

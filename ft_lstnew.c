@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_image.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitsuki <kitsuki@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: kitsuki </var/mail/kitsuki>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/11 17:45:21 by kitsuki           #+#    #+#             */
-/*   Updated: 2023/02/11 17:45:21 by kitsuki          ###   ########.fr       */
+/*   Created: 2022/07/14 10:09:45 by kitsuki           #+#    #+#             */
+/*   Updated: 2022/07/14 18:30:57 by kitsuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	put_pixel(t_image *image, int x, int y, UINT color)
+t_list	*ft_lstnew(t_object *content)
 {
-	char	*tmp;
+	t_list	*out;
 
-	if (image == NULL || image->url == NULL)
-		return ;
-	tmp = image->url + (y * image->length + x * (image->bpp / 8));
-	*(UINT *)tmp = color;
-}
-
-void	draw_image()
-{
+	out = (t_list *)malloc(sizeof(t_list));
+	if (out == NULL)
+		return (NULL);
+	out->content = content;
+	out->next = NULL;
+	return (out);
 }

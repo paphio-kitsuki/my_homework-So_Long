@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_image.c                                       :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kitsuki <kitsuki@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: kitsuki </var/mail/kitsuki>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/11 17:45:21 by kitsuki           #+#    #+#             */
-/*   Updated: 2023/02/11 17:45:21 by kitsuki          ###   ########.fr       */
+/*   Created: 2022/07/13 19:39:43 by kitsuki           #+#    #+#             */
+/*   Updated: 2022/07/14 18:24:24 by kitsuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	put_pixel(t_image *image, int x, int y, UINT color)
+void	ft_lstclear(t_list **lst, void (*del)(t_object *))
 {
-	char	*tmp;
+	t_list	*tmp;
 
-	if (image == NULL || image->url == NULL)
+	if (lst == NULL || del == NULL)
 		return ;
-	tmp = image->url + (y * image->length + x * (image->bpp / 8));
-	*(UINT *)tmp = color;
-}
-
-void	draw_image()
-{
+	while (*lst != NULL)
+	{
+		tmp = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = tmp;
+	}
 }

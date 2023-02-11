@@ -12,15 +12,17 @@
 
 #include "so_long.h"
 
-static t_image	*images;
-
 int	repaint(t_frame *frame)
 {
-	mlx_put_image_to_window(frame->mlx, frame->win, images->image, 0, 0);
-	return (0);
-}
+	t_list		*lst;
+	t_object	*obj;
 
-void	add_image(t_image *image)
-{
-	images = image;
+	lst = frame->list;
+	while (lst != NULL)
+	{
+		obj = lst->content;
+		mlx_put_image_to_window(frame->mlx, frame->win, obj->image->image, obj->x, obj->y);
+		lst = lst->next;
+	}
+	return (0);
 }

@@ -40,22 +40,10 @@
 # define WIDTH			50
 # define HEIGHT			50
 
-typedef struct s_frame
-{
-	void	*mlx;
-	void	*win;
-}			t_frame;
-
-typedef struct s_object
-{
-	int	x;
-	int	y;
-}		t_object;
-
 typedef struct s_image
 {
 	void	*image;
-	char	*addr;
+	char	*url;
 	int		bpp;
 	int		length;
 	int		endian;
@@ -63,7 +51,38 @@ typedef struct s_image
 	int		height;
 }			t_image;
 
-void	add_image(t_image *image);
-int		repaint(t_frame *frame);
+typedef struct s_object
+{
+	int		x;
+	int		y;
+	t_image	*image;
+}		t_object;
+
+typedef struct s_list
+{
+	t_object		*content;
+	struct s_list	*next;
+}					t_list;
+
+typedef struct s_frame
+{
+	void	*mlx;
+	void	*win;
+	t_list	*list;
+}			t_frame;
+
+void		add_image(t_image *image);
+int			repaint(t_frame *frame);
+t_image		*create_image(t_frame *f, char *url);
+t_object	*create_object(int x, int y, t_image *image);
+t_list		*ft_lstnew(t_object *content);
+void		ft_lstadd_front(t_list **lst, t_list *new);
+int			ft_lstsize(t_list *lst);
+t_list		*ft_lstlast(t_list *lst);
+void		ft_lstadd_back(t_list **lst, t_list *new);
+void		ft_lstdelone(t_list *lst, void (*del)(t_object *));
+void		ft_lstclear(t_list **lst, void (*del)(t_object *));
+void		ft_lstiter(t_list *lst, void (*f)(t_object *));
+t_list		*ft_lstmap(t_list *lst, void *(*f)(t_object *), void (*del)(t_object *));
 
 #endif
