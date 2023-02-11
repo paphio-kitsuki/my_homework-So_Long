@@ -75,6 +75,8 @@ void		add_image(t_image *image);
 int			repaint(t_frame *frame);
 t_image		*create_image(t_frame *f, char *url);
 t_object	*create_object(int x, int y, t_image *image);
+void		delete_object(t_object *object);
+void		delete_image(t_image *image);
 t_list		*ft_lstnew(t_object *content);
 void		ft_lstadd_front(t_list **lst, t_list *new);
 int			ft_lstsize(t_list *lst);
