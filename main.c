@@ -6,7 +6,7 @@
 /*   By: kitsuki <kitsuki@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:09:04 by kitsuki           #+#    #+#             */
-/*   Updated: 2023/02/12 02:20:45 by kitsuki          ###   ########.fr       */
+/*   Updated: 2023/02/12 02:23:53 by kitsuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ int	main(void)
 	frame->mlx = mlx_init();
 	frame->win = mlx_new_window(frame->mlx, 500, 500, "mlx 42");
 	t_image	*image = create_image(frame, "./IMG_0159.xpm");
+	printf("%p\n", image->image);
 	frame->list = ft_lstnew(create_object(0, 0, image));
+	printf("%p\n", frame->list->content);
 	paint(frame);
 	mlx_hook(frame->win, DESTROY_NOTIFY, NOEVENT_MASK, exit_func, frame);
 	mlx_key_hook(frame->win, key_notify, frame);
