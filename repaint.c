@@ -21,7 +21,9 @@ int	paint(t_frame *frame)
 	while (lst != NULL)
 	{
 		obj = lst->content;
+		printf("before\n");
 		mlx_put_image_to_window(frame->mlx, frame->win, obj->image->image, obj->x, obj->y);
+		printf("before\n");
 		lst = lst->next;
 	}
 	return (0);
