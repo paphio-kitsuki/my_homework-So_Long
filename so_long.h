@@ -71,7 +71,6 @@ typedef struct s_frame
 	t_list	*list;
 }			t_frame;
 
-int			paint(t_frame *frame);
 int			repaint(t_frame *frame);
 t_image		*create_image(t_frame *f, char *url);
 t_object	*create_object(int x, int y, t_image *image);
