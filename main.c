@@ -50,6 +50,7 @@ int	main(void)
 	frame->win = mlx_new_window(frame->mlx, 500, 500, "mlx 42");
 	t_image	*image = create_image(frame, "./IMG_0159.xpm");
 	frame->list = ft_lstnew(create_object(0, 0, image));
+	paint(frame);
 	mlx_hook(frame->win, CLIENT_MESSAGE, STRUCTURE_NOTIFY_MASK, exit_func, frame);
 	mlx_key_hook(frame->win, key_notify, frame);
 	mlx_expose_hook(frame->win, repaint, frame);
