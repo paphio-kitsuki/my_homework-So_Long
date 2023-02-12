@@ -21,24 +21,26 @@
 # define UINT			unsigned int
 # define UCHAR			unsigned char
 
-# define DESTROY_NOTIFY	17
+# define DESTROY_NOTIFY			17
+# define CLIENT_MESSAGE			33
 
-# define NOEVENT_MASK	0
+# define NOEVENT_MASK			0
+# define STRUCTURE_NOTIFY_MASK	1L<<17
 
-# define W				119
-# define A				97
-# define S				115
-# define D				100
+# define W						119
+# define A						97
+# define S						115
+# define D						100
 
-# define LEFT			65361
-# define UP				65362
-# define RIGHT			65363
-# define DOWN			65364
+# define LEFT					65361
+# define UP						65362
+# define RIGHT					65363
+# define DOWN					65364
 
-# define ESCAPE			65307
+# define ESCAPE					65307
 
-# define WIDTH			50
-# define HEIGHT			50
+# define WIDTH					50
+# define HEIGHT					50
 
 typedef struct s_image
 {
