@@ -16,10 +16,10 @@ t_frame	*frame;
 
 int	exit_func(t_frame *param)
 {
-	printf("www");
-	mlx_destroy_display(param->mlx);
+	printf("www\n");
+	ft_lstclear(param, delete_object);
 	mlx_destroy_window(param->mlx, param->win);
-	ft_lstclear(&param->list, delete_object);
+	mlx_destroy_display(param->mlx);
 	free(param);
 	return (0);
 }
@@ -50,12 +50,6 @@ int	main(void)
 	frame->win = mlx_new_window(frame->mlx, 500, 500, "mlx 42");
 	t_image	*image = create_image(frame, "./IMG_0159.xpm");
 	frame->list = ft_lstnew(create_object(0, 0, image));
-	paint(frame);
-	delete_object(frame, frame->list->content);
-	mlx_destroy_display(frame->mlx);
-	mlx_destroy_window(frame->mlx, frame->win);
-	free(frame);
-	exit(0);
 	mlx_hook(frame->win, CLIENT_MESSAGE, STRUCTURE_NOTIFY_MASK, exit_func, frame);
 	mlx_key_hook(frame->win, key_notify, frame);
 	mlx_expose_hook(frame->win, repaint, frame);
