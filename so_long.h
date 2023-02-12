@@ -83,7 +83,7 @@ void		ft_lstadd_front(t_list **lst, t_list *new);
 int			ft_lstsize(t_list *lst);
 t_list		*ft_lstlast(t_list *lst);
 void		ft_lstadd_back(t_list **lst, t_list *new);
-void		lstdelone(t_frame *f, t_list *l, void (*del)(t_frame *, t_object *));
+void		lstdelone(t_frame *f, void (*del)(t_frame *, t_object *));
 void		ft_lstclear(t_frame *f, void (*del)(t_frame *, t_object *));
 void		ft_lstiter(t_list *lst, void (*f)(t_object *));
 

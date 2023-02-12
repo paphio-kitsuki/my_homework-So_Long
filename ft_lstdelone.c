@@ -12,10 +12,10 @@
 
 #include "so_long.h"
 
-void	lstdelone(t_frame *f, t_list *lst, void (*del)(t_frame *, t_object *))
+void	lstdelone(t_frame *frame, void (*del)(t_frame *, t_object *))
 {
-	if (f == NULL || lst == NULL || del == NULL)
+	if (frame == NULL || del == NULL)
 		return ;
-	del(f, lst->content);
-	free(lst);
+	del(frame, frame->list->content);
+	free(frame->list);
 }
