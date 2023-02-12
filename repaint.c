@@ -12,21 +12,6 @@
 
 #include "so_long.h"
 
-int	destroy_paint(t_frame *frame)
-{
-	t_list		*lst;
-	t_object	*obj;
-
-	lst = frame->list;
-	while (lst != NULL)
-	{
-		obj = lst->content;
-		mlx_destroy_image(frame->mlx, obj->image->image);
-		lst = lst->next;
-	}
-	return (0);
-}
-
 int	repaint(t_frame *frame)
 {
 	t_list		*lst;

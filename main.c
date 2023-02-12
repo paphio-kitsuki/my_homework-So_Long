@@ -16,17 +16,16 @@ t_frame	*frame;
 
 int	exit_func(t_frame *param)
 {
-	printf("www\n");
 	ft_lstclear(param, delete_object);
 	mlx_destroy_window(param->mlx, param->win);
 	mlx_destroy_display(param->mlx);
 	free(param);
+	exit(0);
 	return (0);
 }
 
 int	key_notify(int button, t_frame *param)
 {
-	//printf("%p\n", param->list->content);
 	if (param->list == NULL)
 		return (-1);
 	if (button == ESCAPE)
@@ -54,5 +53,4 @@ int	main(void)
 	mlx_key_hook(frame->win, key_notify, frame);
 	mlx_expose_hook(frame->win, repaint, frame);
 	mlx_loop(frame->mlx);
-	printf("finish\n");
 }
