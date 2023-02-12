@@ -21,7 +21,7 @@ void	ft_lstclear(t_frame *frame, void (*del)(t_frame *, t_object *))
 	while (frame->list != NULL)
 	{
 		tmp = frame->list->next;
-		ft_lstdelone(frame->list, del);
+		lstdelone(frame->list, del);
 		frame->list = tmp;
 	}
 }
