@@ -12,13 +12,14 @@
 
 #include "so_long.h"
 
-void	delete_image(t_image *image)
+void	delete_image(t_frame *frame, t_image *image)
 {
+	mlx_destroy_image(frame->mlx, image->image);
 	free(image);
 }
 
-void	delete_object(t_object *object)
+void	delete_object(t_frame *frame, t_object *object)
 {
-	delete_image(object->image);
+	delete_image(frame, object->image);
 	free(object);
 }
