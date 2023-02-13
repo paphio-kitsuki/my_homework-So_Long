@@ -19,8 +19,10 @@
 # include <math.h>
 # include <fcntl.h>
 
-# define UINT			unsigned int
-# define UCHAR			unsigned char
+# define UINT					unsigned int
+# define UCHAR					unsigned char
+
+# define STDOUT					1
 
 # define DESTROY_NOTIFY			17
 # define CLIENT_MESSAGE			33
@@ -44,6 +46,7 @@
 
 # define TRANSPARENCY			0xFF
 
+# define NONE					-1
 # define BACKGROUND				0
 # define ROAD					1
 # define PLAYER					2
@@ -70,6 +73,7 @@ typedef struct s_player
 	int		x;
 	int		y;
 	t_image	*image;
+	size_t	move_count;
 }			t_player;
 
 typedef struct s_frame
@@ -97,13 +101,17 @@ typedef struct s_memo
 }					t_memo;
 
 int			**read_map(const char *path, int *width, int *height);
-void		move(t_frame *frame, t_player *player, int x, int y);
+int			is_possible(int **map);
+int			search(int **list, int target);
+int			move(t_frame *frame, int x, int y);
+void		action(t_frame *frame);
+int			exit_func(t_frame *param);
 int			repaint(t_frame *frame);
 t_image		*create_image(t_frame *f, char *path);
 t_image		*create_empty_image(t_frame *f, int width, int height);
-t_player	*create_player(int **map, int width);
+t_player	*create_player(int **map);
 void		delete_image(t_frame *frame, t_image *image);
-void		clear_list(int	**lst);
+void		clear_list(int	***lst);
 void		images_destroy(t_frame *frame);
 int			images_create(t_frame *frame);
 t_image		*get_image(int index);
@@ -128,5 +136,7 @@ char		*search_newline(char *s);
 size_t		ft_strlen(const char *str);
 char		*ft_substr(char const *str, unsigned int start, size_t len);
 int			memo_join(t_memo *s1, char *s2);
+void		ft_putstrln(char *s, int fd);
+void		ft_putstr(char *s, int fd);
 
 #endif

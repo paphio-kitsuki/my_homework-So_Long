@@ -12,8 +12,11 @@
 
 #include "so_long.h"
 
-void	move(t_frame *frame, t_player *player, int x, int y)
+int	move(t_frame *frame, int x, int y)
 {
+	t_player	*player;
+
+	player = frame->player;
 	player->x += x;
 	player->y += y;
 	if (player->x < 0)
@@ -24,9 +27,28 @@ void	move(t_frame *frame, t_player *player, int x, int y)
 		player->y = 0;
 	else if (player->y >= frame->height)
 		player->y = frame->height - 1;
-	if (frame->list[player->y][player->x] == WALL)
+	else if (frame->list[player->y][player->x] == WALL)
 	{
 		player->x -= x;
 		player->y -= y;
 	}
+	else
+		return (1);
+	return (0);
+}
+
+void	action(t_frame *frame)
+{
+	frame->player->move_count ++;
+	ft_putstr("Move Count : ", STDOUT);
+	write(STDOUT, &(frame->player->move_count), sizeof(size_t));
+	ft_putstrln("", STDOUT);
+	if ((frame->list)[frame->player->y][frame->player->x] == COLLECTION)
+		(frame->list)[frame->player->y][frame->player->x] = ROAD;
+	else if ((frame->list)[frame->player->y][frame->player->x] == GOAL)
+	{
+		if (search(frame->list, COLLECTION) == 0)
+			exit_func(frame);
+	}
+	repaint(frame);
 }

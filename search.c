@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete.c                                           :+:      :+:    :+:   */
+/*   search.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kitsuki <kitsuki@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/12 02:05:58 by kitsuki           #+#    #+#             */
-/*   Updated: 2023/02/12 02:05:58 by kitsuki          ###   ########.fr       */
+/*   Created: 2023/02/14 05:48:21 by kitsuki           #+#    #+#             */
+/*   Updated: 2023/02/14 05:48:21 by kitsuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	delete_image(t_frame *frame, t_image *image)
+int	search(int **list, int target)
 {
-	mlx_destroy_image(frame->mlx, image->image);
-	free(image);
-}
+	int	x;
+	int	y;
 
-void	clear_list(int	***lst)
-{
-	int	**tmp;
-
-	tmp = *lst;
-	while (*tmp != NULL)
+	y = 0;
+	while (*(list + y) != NULL)
 	{
-		free(*tmp);
-		tmp++;
+		x = 0;
+		while (list[y][x] != NONE)
+		{
+			if (list[y][x] == target)
+				return (1);
+			x ++;
+		}
+		y ++;
 	}
-	free(*lst);
-	*lst = NULL;
+	return (0);
 }

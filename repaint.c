@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
 
 static int	clear_background(void);
 
@@ -22,7 +21,6 @@ int	repaint(t_frame *f)
 	int		j;
 
 	clear_background();
-	printf("cleared\n");
 	background = get_image(BACKGROUND);
 	i = 0;
 	while (i < f->width)

@@ -14,8 +14,8 @@
 
 static t_list	*create_readlines(const char *path);
 static int		**create_list(t_list *buffer, int *width, int *height);
-static int		*create_numberline(t_list *buf, int *checker, int *length);
-static int		get_number(int *dst, char *src, size_t ct, int *f);
+static int		*create_numberline(t_list *buf, UINT *checker, int *length);
+static int		get_number(int *dst, char *src, size_t ct, UINT *flag);
 
 int	**read_map(const char *path, int *width, int *height)
 {
@@ -69,7 +69,7 @@ static int	**create_list(t_list *buffer, int *width, int *height)
 {
 	size_t	count;
 	size_t	size;
-	int		checker;
+	UINT	checker;
 	int		**out;
 
 	checker = 0;
@@ -84,7 +84,7 @@ static int	**create_list(t_list *buffer, int *width, int *height)
 		out[count] = create_numberline(buffer, &checker, width);
 		if (out[count] == NULL)
 		{
-			clear_list(out);
+			clear_list(&out);
 			return (NULL);
 		}
 		buffer = buffer->next;
@@ -94,21 +94,20 @@ static int	**create_list(t_list *buffer, int *width, int *height)
 	return (out);
 }
 
-static int	*create_numberline(t_list *buf, int *checker, int *length)
+static int	*create_numberline(t_list *buf, UINT *checker, int *length)
 {
 	int		*out;
 	size_t	count;
 
-	if (buf == NULL || checker == NULL)
+	if (buf == NULL || checker == NULL || length == NULL)
 		return (NULL);
-	if ((*length == -1 || buf->next == NULL) && *checker % 2 == 0)
-		*checker += 1;
-	else if (*checker % 2 == 1)
-		*checker -= 1;
+	*checker &= !(UINT)1;
+	if (*length == -1 || buf->next == NULL)
+		*checker |= 1;
 	*length = ft_strlen(buf->str);
 	if (buf->next != NULL && *length != ft_strlen(buf->next->str))
 		return (NULL);
-	out = (int *)malloc(sizeof (int) * (*length));
+	out = (int *)malloc(sizeof (int) * (*length +  1));
 	if (out == NULL)
 		return (NULL);
 	count = 0;
@@ -120,10 +119,11 @@ static int	*create_numberline(t_list *buf, int *checker, int *length)
 			return (NULL);
 		}
 	}
+	out[*length] = NONE;
 	return (out);
 }
 
-static int	get_number(int *dst, char *src, size_t ct, int *f)
+static int	get_number(int *dst, char *src, size_t ct, UINT *f)
 {
 	if ((ct == 0 || ct == ft_strlen(src) - 1 || *f % 2 == 1) && src[ct] != '1')
 		return (-1);

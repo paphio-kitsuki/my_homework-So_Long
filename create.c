@@ -36,13 +36,13 @@ t_image	*create_empty_image(t_frame *f, int width, int height)
 	return (i);
 }
 
-static void	search_player_point(int **map, int width, int *x, int *y)
+static void	search_player_point(int **map, int *x, int *y)
 {
 	*y = 0;
 	while (*(map + *y) != NULL)
 	{
 		*x = 0;
-		while (*x < width)
+		while (map[*y][*x] != NONE)
 		{
 			if (map[*y][*x] == PLAYER)
 			{
@@ -57,18 +57,18 @@ static void	search_player_point(int **map, int width, int *x, int *y)
 	*y = -1;
 }
 
-t_player	*create_player(int **map, int width)
+t_player	*create_player(int **map)
 {
 	t_player	*out;
 	int			x;
 	int			y;
 
-	if (map == NULL || width <= 0)
+	if (map == NULL)
 		return (NULL);
 	out = (t_player *)malloc(sizeof(t_player));
 	if (out == NULL)
 		return (NULL);
-	search_player_point(map, width, &x, &y);
+	search_player_point(map, &x, &y);
 	if (x < 0 || y < 0)
 	{
 		free(out);
@@ -77,5 +77,6 @@ t_player	*create_player(int **map, int width)
 	out->image = get_image(PLAYER);
 	out->x = x;
 	out->y = y;
+	out->move_count = 0;
 	return (out);
 }

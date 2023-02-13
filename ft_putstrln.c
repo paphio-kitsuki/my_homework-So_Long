@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete.c                                           :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kitsuki <kitsuki@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/12 02:05:58 by kitsuki           #+#    #+#             */
-/*   Updated: 2023/02/12 02:05:58 by kitsuki          ###   ########.fr       */
+/*   Created: 2023/02/01 00:58:36 by kitsuki           #+#    #+#             */
+/*   Updated: 2023/02/01 00:58:36 by kitsuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	delete_image(t_frame *frame, t_image *image)
+void	ft_putstrln(char *s, int fd)
 {
-	mlx_destroy_image(frame->mlx, image->image);
-	free(image);
+	if (s == NULL)
+		return ;
+	ft_putstr(s, fd);
+	write(fd, "\n", sizeof(char));
 }
 
-void	clear_list(int	***lst)
+void	ft_putstr(char *s, int fd)
 {
-	int	**tmp;
-
-	tmp = *lst;
-	while (*tmp != NULL)
+	if (s == NULL)
+		return ;
+	while (*s != '\0')
 	{
-		free(*tmp);
-		tmp++;
+		write(fd, s, sizeof(*s));
+		s ++;
 	}
-	free(*lst);
-	*lst = NULL;
 }
