@@ -83,7 +83,7 @@ typedef struct s_frame
 int			repaint(t_frame *frame);
 t_image		*create_image(t_frame *f, char *url);
 t_object	*create_object(int x, int y, t_image *image);
-void		delete_object(t_frame *frame, t_object *object);
+void		delete_object(t_object *object);
 void		delete_image(t_frame *frame, t_image *image);
 void		images_destroy(t_frame *frame);
 int			images_create(t_frame *frame);
