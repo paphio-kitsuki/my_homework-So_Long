@@ -29,7 +29,7 @@ int	**read_map(const char *path, int *width, int *height)
 	if (tmp == NULL || ft_strncmp(tmp, ".ber", 5) != 0)
 		return (NULL);
 	buffer = create_readlines(path);
-	ft_lstfix(buffer);
+	ft_lstfix(&buffer);
 	if (buffer == NULL)
 		return (NULL);
 	*width = -1;

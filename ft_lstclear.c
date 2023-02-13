@@ -53,7 +53,7 @@ void	ft_lstfix(t_list **lst)
 	t_list	*tmp;
 
 	if (lst == NULL || *lst == NULL)
-		return (NULL);
+		return ;
 	while (*lst != NULL && *((*lst)->str) == '\0')
 	{
 		tmp = (*lst)->next;
