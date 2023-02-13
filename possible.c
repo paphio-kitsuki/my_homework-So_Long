@@ -104,7 +104,7 @@ static void	loop_search(int **dst, int bfs)
 	while (*(dst + y) != NULL)
 	{
 		x = 0;
-		while (dst[y][x] != NONE)
+		while (dst[y][x] != -2)
 		{
 			if (dst[y][x] == bfs)
 			{
