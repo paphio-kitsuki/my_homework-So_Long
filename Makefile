@@ -6,10 +6,10 @@ RM		= rm -f
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror -L$(PWD)/$(MLX_DIR) -lmlx -lXext -lX11
 ifneq ($(OS),Windows_NT)
-	ifneq ($(shell uname),Linux)
-		MLX_DIR	= mlx_mac
-		CFLAGS	= -Wall -Wextra -Werror -L$(PWD)/$(MLX_DIR) -lmlx -L/usr/X11R6/lib -lX11 -lXext -framework OpenGL -framework AppKit 
-	endif
+ ifneq ($(shell uname),Linux)
+  MLX_DIR	= mlx_mac
+  CFLAGS	= -Wall -Wextra -Werror -L$(PWD)/$(MLX_DIR) -lmlx -L/usr/X11R6/lib -lX11 -lXext -framework OpenGL -framework AppKit -D ISMAC
+ endif
 endif
 
 all: ${NAME}

@@ -79,7 +79,7 @@ static int	search_and_check(int **dst, int **src)
 	while (*(dst + y) != NULL)
 	{
 		x = 0;
-		while (dst[y][x] != NONE)
+		while (src[y][x] != NONE)
 		{
 			if (src[y][x] == GOAL || src[y][x] == COLLECTION)
 			{
