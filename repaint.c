@@ -12,6 +12,8 @@
 
 #include "so_long.h"
 
+static int	clear_background(void);
+
 int	repaint(t_frame *f)
 {
 	t_list	*lst;

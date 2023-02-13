@@ -27,7 +27,7 @@ UINT	get_pixel(t_image *image, int x, int y)
 	char	*tmp;
 
 	if (image == NULL || image->url == NULL)
-		return ;
+		return (0);
 	tmp = image->url + (y * image->length + x * (image->bpp / 8));
 	return (*(UINT *)tmp);
 }
