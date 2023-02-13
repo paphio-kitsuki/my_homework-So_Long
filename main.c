@@ -51,9 +51,9 @@ int	main(void)
 	frame->mlx = mlx_init();
 	images_create(frame);
 	frame->list = ft_lstnew(create_object(0, 0, get_image(PLAYER)));
-	ft_lstadd_back(&(frame->list), create_object(160, 0, get_image(WALL)));
-	ft_lstadd_back(&(frame->list), create_object(320, 320, get_image(COLLECTION)));
-	ft_lstadd_back(&(frame->list), create_object(80, 640, get_image(GOAL)));
+	ft_lstadd_back(&(frame->list), ft_lstnew(create_object(160, 0, get_image(WALL))));
+	ft_lstadd_back(&(frame->list), ft_lstnew(create_object(320, 320, get_image(COLLECTION))));
+	ft_lstadd_back(&(frame->list), ft_lstnew(create_object(80, 640, get_image(GOAL))));
 	frame->win = mlx_new_window(frame->mlx, frame->width, frame->height, "mlx 42");
 	mlx_hook(frame->win, CLIENT_MESSAGE, STRUCTURE_NOTIFY_MASK, exit_func, frame);
 	mlx_key_hook(frame->win, key_notify, frame);
