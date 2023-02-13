@@ -57,7 +57,6 @@ int	main(int argc, char *argv[])
 	frame->list = read_map(argv[1], &frame->width, &frame->height);
 	images_create(frame);
 	int x = is_possible(frame->list);
-	write(1, &x, sizeof(int));
 	frame->player = create_player(frame->list);
 	frame->win = mlx_new_window(frame->mlx, frame->width * WIDTH, frame->height * HEIGHT, "mlx 42");
 	mlx_hook(frame->win, CLIENT_MESSAGE, 1L<<17, exit_func, frame);
