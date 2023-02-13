@@ -30,13 +30,13 @@ int	key_notify(int button, t_frame *param)
 	if (button == ESCAPE)
 		exit_func(param);
 	else if (button == A || button == LEFT)
-		param->list->content->x -= WIDTH;
+		move(param, param->list->content, -1, 0);
 	else if (button == D || button == RIGHT)
-		param->list->content->x += WIDTH;
+		move(param, param->list->content, 1, 0);
 	else if (button == W || button == UP)
-		param->list->content->y -= HEIGHT;
+		move(param, param->list->content, 0, -1);
 	else if (button == S || button == DOWN)
-		param->list->content->y += HEIGHT;
+		move(param, param->list->content, 0, 1);
 	repaint(param);
 	return (0);
 }
@@ -46,8 +46,8 @@ int	main(void)
 	t_frame	*frame;
 
 	frame = (t_frame *)malloc(sizeof(t_frame));
-	frame->width = 500;
-	frame->height = 500;
+	frame->width = WIDTH * 10;
+	frame->height = HEIGHT * 10;
 	frame->mlx = mlx_init();
 	images_create(frame);
 	frame->list = ft_lstnew(create_object(0, 0, get_image(PLAYER)));

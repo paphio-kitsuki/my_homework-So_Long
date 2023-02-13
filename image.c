@@ -21,7 +21,7 @@ static void	set_image(t_frame *f, t_image *images[], int index)
 	if (index == ROAD)
 		images[ROAD] = create_image(f, "./road.xpm");
 	else if (index == PLAYER)
-		images[PLAYER] = create_image(f, "./IMG_0159.xpm");
+		images[PLAYER] = create_image(f, "./player.xpm");
 	else if (index == WALL)
 		images[WALL] = create_image(f, "./road.xpm");
 	else if (index == GOAL)

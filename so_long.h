@@ -85,6 +85,7 @@ typedef struct s_frame
 	t_list	*list;
 }			t_frame;
 
+void		move(t_frame *frame, t_object *obj, int x, int y);
 int			repaint(t_frame *frame);
 t_image		*create_image(t_frame *f, char *url);
 t_image		*create_empty_image(t_frame *f, int width, int height);
