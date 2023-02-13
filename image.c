@@ -16,8 +16,13 @@ static t_image		**g_images;
 
 static void	set_image(t_frame *f, t_image *images[], int index)
 {
+	int	width;
+	int	height;
+
+	width = f->width * WIDTH;
+	height = f->height * HEIGHT;
 	if (index == BACKGROUND)
-		images[BACKGROUND] = create_empty_image(f, f->width, f->height);
+		images[BACKGROUND] = create_empty_image(f, width, height);
 	if (index == ROAD)
 		images[ROAD] = create_image(f, "./road.xpm");
 	else if (index == PLAYER)

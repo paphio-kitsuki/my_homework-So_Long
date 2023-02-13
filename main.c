@@ -53,11 +53,10 @@ int	main(int argc, char *argv[])
 	frame->mlx = mlx_init();
 	frame->list = read_map(argv[1], &frame->width, &frame->height);
 	images_create(frame);
-	frame->player = create_player(frame->list, frame->height);
+	frame->player = create_player(frame->list, frame->width);
 	frame->win = mlx_new_window(frame->mlx, frame->width * WIDTH, frame->height * HEIGHT, "mlx 42");
 	mlx_hook(frame->win, CLIENT_MESSAGE, 1L<<17, exit_func, frame);
 	mlx_key_hook(frame->win, key_notify, frame);
 	mlx_expose_hook(frame->win, repaint, frame);
-	printf("ok\n");
 	mlx_loop(frame->mlx);
 }

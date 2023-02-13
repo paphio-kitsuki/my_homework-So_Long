@@ -36,39 +36,39 @@ t_image	*create_empty_image(t_frame *f, int width, int height)
 	return (i);
 }
 
-static void	search_player_point(int **map, int height, int *x, int *y)
+static void	search_player_point(int **map, int width, int *x, int *y)
 {
-	*x = 0;
-	while (*(map + *x) != NULL)
+	*y = 0;
+	while (*(map + *y) != NULL)
 	{
-		*y = 0;
-		while (*y < height)
+		*x = 0;
+		while (*x < width)
 		{
-			if (map[*x][*y] == 'P')
+			if (map[*y][*x] == PLAYER)
 			{
-				map[*x][*y] = 0;
+				map[*y][*x] = ROAD;
 				return ;
 			}
-			(*y)++;
+			(*x)++;
 		}
-		(*x)++;
+		(*y)++;
 	}
 	*x = -1;
 	*y = -1;
 }
 
-t_player	*create_player(int **map, int height)
+t_player	*create_player(int **map, int width)
 {
 	t_player	*out;
 	int			x;
 	int			y;
 
-	if (map == NULL || height <= 0)
+	if (map == NULL || width <= 0)
 		return (NULL);
 	out = (t_player *)malloc(sizeof(t_player));
 	if (out == NULL)
 		return (NULL);
-	search_player_point(map, height, &x, &y);
+	search_player_point(map, width, &x, &y);
 	if (x < 0 || y < 0)
 	{
 		free(out);

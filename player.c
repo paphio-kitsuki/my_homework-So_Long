@@ -24,7 +24,7 @@ void	move(t_frame *frame, t_player *player, int x, int y)
 		player->y = 0;
 	else if (player->y >= frame->height)
 		player->y = frame->height - 1;
-	if (frame->list[player->x][player->y] == WALL)
+	if (frame->list[player->y][player->x] == WALL)
 	{
 		player->x -= x;
 		player->y -= y;

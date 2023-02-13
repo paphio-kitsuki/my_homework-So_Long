@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <stdio.h>
 
 static int	clear_background(void);
 
@@ -21,6 +22,7 @@ int	repaint(t_frame *f)
 	int		j;
 
 	clear_background();
+	printf("cleared\n");
 	background = get_image(BACKGROUND);
 	i = 0;
 	while (i < f->width)
@@ -28,8 +30,8 @@ int	repaint(t_frame *f)
 		j = 0;
 		while (j < f->height)
 		{
-			if (f->list[i][j] != ROAD)
-				draw_image(background, get_image(f->list[i][j]), i, j);
+			if ((f->list)[j][i] != ROAD)
+				draw_image(background, get_image((f->list)[j][i]), i, j);
 			j ++;
 		}
 		i ++;
@@ -52,7 +54,7 @@ static int	clear_background(void)
 		j = 0;
 		while (j < background->height / HEIGHT)
 		{
-			draw_image(background, get_image(ROAD), i * WIDTH, j * HEIGHT);
+			draw_image(background, get_image(ROAD), i, j);
 			j ++;
 		}
 	i ++;
