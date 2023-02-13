@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	ft_lstclear(t_frame *frame, void (*del)(t_frame *, t_object *))
+void	ft_lstclear(t_frame *frame, void (*del)(t_object *))
 {
 	t_list	*tmp;
 

@@ -12,10 +12,9 @@
 
 #include "so_long.h"
 
-t_frame	*frame;
-
 int	exit_func(t_frame *param)
 {
+	images_destroy(param);
 	ft_lstclear(param, delete_object);
 	mlx_destroy_window(param->mlx, param->win);
 	mlx_destroy_display(param->mlx);
@@ -31,24 +30,26 @@ int	key_notify(int button, t_frame *param)
 	if (button == ESCAPE)
 		exit_func(param);
 	else if (button == A || button == LEFT)
-		param->list->content->x -= 10;
+		param->list->content->x -= WIDTH;
 	else if (button == D || button == RIGHT)
-		param->list->content->x += 10;
+		param->list->content->x += WIDTH;
 	else if (button == W || button == UP)
-		param->list->content->y -= 10;
+		param->list->content->y -= HEIGHT;
 	else if (button == S || button == DOWN)
-		param->list->content->y += 10;
+		param->list->content->y += HEIGHT;
 	repaint(param);
 	return (0);
 }
 
 int	main(void)
-{
+{	
+	t_frame	*frame;
+
 	frame = (t_frame *)malloc(sizeof(t_frame));
 	frame->mlx = mlx_init();
 	frame->win = mlx_new_window(frame->mlx, 500, 500, "mlx 42");
-	t_image	*image = create_image(frame, "./IMG_0159.xpm");
-	frame->list = ft_lstnew(create_object(0, 0, image));
+	images_create(frame);
+	frame->list = ft_lstnew(create_object(0, 0, get_image(ROAD)));
 	mlx_hook(frame->win, CLIENT_MESSAGE, STRUCTURE_NOTIFY_MASK, exit_func, frame);
 	mlx_key_hook(frame->win, key_notify, frame);
 	mlx_expose_hook(frame->win, repaint, frame);

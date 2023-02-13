@@ -18,8 +18,7 @@ void	delete_image(t_frame *frame, t_image *image)
 	free(image);
 }
 
-void	delete_object(t_frame *frame, t_object *object)
+void	delete_object(t_object *object)
 {
-	delete_image(frame, object->image);
 	free(object);
 }

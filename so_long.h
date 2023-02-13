@@ -42,6 +42,13 @@
 # define WIDTH					50
 # define HEIGHT					50
 
+# define ROAD					0
+# define PLAYER					1
+# define WALL					2
+# define GOAL					3
+# define COLLECTION				4
+# define LENGTH					5
+
 typedef struct s_image
 {
 	void	*image;
@@ -78,13 +85,16 @@ t_image		*create_image(t_frame *f, char *url);
 t_object	*create_object(int x, int y, t_image *image);
 void		delete_object(t_frame *frame, t_object *object);
 void		delete_image(t_frame *frame, t_image *image);
+void		images_destroy(t_frame *frame);
+int			images_create(t_frame *frame);
+t_image		*get_image(int index);
 t_list		*ft_lstnew(t_object *content);
 void		ft_lstadd_front(t_list **lst, t_list *new);
 int			ft_lstsize(t_list *lst);
 t_list		*ft_lstlast(t_list *lst);
 void		ft_lstadd_back(t_list **lst, t_list *new);
-void		lstdelone(t_frame *f, void (*del)(t_frame *, t_object *));
-void		ft_lstclear(t_frame *f, void (*del)(t_frame *, t_object *));
+void		lstdelone(t_frame *f, void (*del)(t_object *));
+void		ft_lstclear(t_frame *f, void (*del)(t_object *));
 void		ft_lstiter(t_list *lst, void (*f)(t_object *));
 
 #endif
