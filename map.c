@@ -36,7 +36,7 @@ int	**read_map(const char *path, int *width, int *height)
 	*width = -1;
 	out = create_list(buffer, width, height, &checker);
 	ft_lstclear(&buffer);
-	if (out != NULL && checker & 14 != 14)
+	if (out != NULL && (checker & 14) != 14)
 		clear_list(&out);
 	return (out);
 }
@@ -103,7 +103,7 @@ static int	*create_numberline(t_list *buf, UINT *checker, int *length)
 
 	if (buf == NULL || checker == NULL || length == NULL)
 		return (NULL);
-	*checker &= !(UINT)1;
+	*checker &= ~(UINT)1;
 	if (*length == -1 || buf->next == NULL)
 		*checker |= 1;
 	*length = ft_strlen(buf->str);
