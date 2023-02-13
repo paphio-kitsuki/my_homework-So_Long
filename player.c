@@ -42,12 +42,12 @@ void	action(t_frame *frame)
 	char	*tmp;
 
 	frame->player->move_count ++;
-	ft_putstr("Move Count : ", STDOUT);
 	tmp = ft_itoa(frame->player->move_count);
 	if (tmp != NULL)
 	{
 		if (ISBONUS == 0)
 		{
+			ft_putstr("Move Count : ", STDOUT);
 			ft_putstrln(tmp, STDOUT);
 			free(tmp);
 		}

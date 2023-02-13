@@ -129,7 +129,7 @@ static int	get_number(int *dst, char *src, size_t ct, UINT *f)
 {
 	if ((ct == 0 || ct == ft_strlen(src) - 1 || *f % 2 == 1) && src[ct] != '1')
 		return (-1);
-	if (((*f & 2) == 1 && src[ct] == 'E') || ((*f & 4) == 1 && src[ct] == 'P'))
+	if (((*f & 2) == 2 && src[ct] == 'E') || ((*f & 4) == 4 && src[ct] == 'P'))
 		return (-1);
 	if (src[ct] == 'E')
 		*f += 2;
