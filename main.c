@@ -46,10 +46,12 @@ int	main(void)
 	t_frame	*frame;
 
 	frame = (t_frame *)malloc(sizeof(t_frame));
+	frame->width = 500;
+	frame->height = 500;
 	frame->mlx = mlx_init();
-	frame->win = mlx_new_window(frame->mlx, 500, 500, "mlx 42");
+	frame->win = mlx_new_window(frame->mlx, frame->width, frame->height, "mlx 42");
 	images_create(frame);
-	frame->list = ft_lstnew(create_object(0, 0, get_image(ROAD)));
+	frame->list = ft_lstnew(create_object(0, 0, get_image(PLAYER)));
 	mlx_hook(frame->win, CLIENT_MESSAGE, STRUCTURE_NOTIFY_MASK, exit_func, frame);
 	mlx_key_hook(frame->win, key_notify, frame);
 	mlx_expose_hook(frame->win, repaint, frame);

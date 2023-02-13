@@ -23,6 +23,19 @@ t_image	*create_image(t_frame *f, char *url)
 	return (i);
 }
 
+t_image	*create_empty_image(t_frame *f, int width, int height)
+{
+	t_image	*i;
+	i = (t_image *)malloc(sizeof(t_image));
+	if (i == NULL)
+		return (NULL);
+	i->width = width;
+	i->height = height;
+	i->image = mlx_new_image(f->mlx, i->width, i->height);
+	i->url = mlx_get_data_addr(i->image, &i->bpp, &i->length, &i->endian);
+	return (i);
+}
+
 t_object	*create_object(int x, int y, t_image *image)
 {
 	t_object	*out;

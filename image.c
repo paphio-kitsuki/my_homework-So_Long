@@ -14,18 +14,20 @@
 
 static t_image		**g_images;
 
-static void	set_image(t_frame *frame, t_image *images[], int index)
+static void	set_image(t_frame *f, t_image *images[], int index)
 {
+	if (index == BACKGROUND)
+		images[BACKGROUND] = create_empty_image(f, f->width, f->height);
 	if (index == ROAD)
-		images[ROAD] = create_image(frame, "./road.xpm");
+		images[ROAD] = create_image(f, "./road.xpm");
 	else if (index == PLAYER)
-		images[PLAYER] = create_image(frame, "./IMG_0159.xpm");
+		images[PLAYER] = create_image(f, "./IMG_0159.xpm");
 	else if (index == WALL)
-		images[WALL] = create_image(frame, "./road.xpm");
+		images[WALL] = create_image(f, "./road.xpm");
 	else if (index == GOAL)
-		images[GOAL] = create_image(frame, "./road.xpm");
+		images[GOAL] = create_image(f, "./road.xpm");
 	else if (index == COLLECTION)
-		images[COLLECTION] = create_image(frame, "./road.xpm");
+		images[COLLECTION] = create_image(f, "./road.xpm");
 }
 
 int	images_create(t_frame *frame)

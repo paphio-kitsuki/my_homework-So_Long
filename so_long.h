@@ -39,15 +39,16 @@
 
 # define ESCAPE					65307
 
-# define WIDTH					50
-# define HEIGHT					50
+# define WIDTH					80
+# define HEIGHT					80
 
-# define ROAD					0
-# define PLAYER					1
-# define WALL					2
-# define GOAL					3
-# define COLLECTION				4
-# define LENGTH					5
+# define BACKGROUND				0
+# define ROAD					1
+# define PLAYER					2
+# define LENGTH					3
+# define WALL					4
+# define GOAL					5
+# define COLLECTION				6
 
 typedef struct s_image
 {
@@ -77,17 +78,24 @@ typedef struct s_frame
 {
 	void	*mlx;
 	void	*win;
+	int		width;
+	int		height;
 	t_list	*list;
 }			t_frame;
 
 int			repaint(t_frame *frame);
 t_image		*create_image(t_frame *f, char *url);
+t_image		*create_empty_image(t_frame *f, int width, int height);
 t_object	*create_object(int x, int y, t_image *image);
 void		delete_object(t_object *object);
 void		delete_image(t_frame *frame, t_image *image);
 void		images_destroy(t_frame *frame);
 int			images_create(t_frame *frame);
 t_image		*get_image(int index);
+void		draw_image(t_image *dst, t_image *src, int x, int y);
+void		draw_object(t_image *image, t_object *obj);
+void		put_pixel(t_image *image, int x, int y, UINT color);
+UINT		get_pixel(t_image *image, int x, int y);
 t_list		*ft_lstnew(t_object *content);
 void		ft_lstadd_front(t_list **lst, t_list *new);
 int			ft_lstsize(t_list *lst);
