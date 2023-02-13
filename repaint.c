@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <stdio.h>
 
 static int	clear_background(void);
 
@@ -27,7 +28,9 @@ int	repaint(t_frame *f)
 		draw_object(background, lst->content);
 		lst = lst->next;
 	}
-	mlx_put_image_to_window(f->mlx, f->win, background, 0, 0);
+	printf("flag\n");
+	mlx_put_image_to_window(f->mlx, f->win, background->image, 0, 0);
+	printf("set\n");
 	return (0);
 }
 
@@ -47,5 +50,6 @@ static int	clear_background(void)
 			draw_image(background, get_image(ROAD), i * WIDTH, j * HEIGHT);
 			j ++;
 		}
+	i ++;
 	}
 }

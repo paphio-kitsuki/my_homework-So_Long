@@ -34,11 +34,11 @@ int	images_create(t_frame *frame)
 {
 	size_t	count;
 
-	g_images = (t_image **)malloc(sizeof(t_image *) * LENGTH);
+	g_images = (t_image **)malloc(sizeof(t_image *) * (LENGTH + 1));
 	if (g_images == NULL)
 		return (-1);
 	count = 0;
-	while (count < LENGTH)
+	while (count <= LENGTH)
 		g_images[count++] = NULL;
 	count = 0;
 	while (count < LENGTH)
