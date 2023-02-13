@@ -13,39 +13,39 @@
 #include "so_long.h"
 #include <stdio.h>
 
-static int	clear_background(t_frame *frame);
+static int	clear_background(void);
 
 int	repaint(t_frame *f)
 {
 	t_list	*lst;
-	//t_image	*background;
+	t_image	*background;
 
-	clear_background(f);
-	//background = get_image(BACKGROUND);
+	clear_background();
+	background = get_image(BACKGROUND);
 	lst = f->list;
 	while (lst != NULL)
 	{
-		draw_object(f, lst->content);
+		draw_object(background, lst->content);
 		lst = lst->next;
 	}
-	//mlx_put_image_to_window(f->mlx, f->win, background->image, 0, 0);
+	mlx_put_image_to_window(f->mlx, f->win, background->image, 0, 0);
 	return (0);
 }
 
-static int	clear_background(t_frame *frame)
+static int	clear_background(void)
 {
-	t_image	*road;
+	t_image	*background;
 	int		i;
 	int		j;
 
-	road = get_image(ROAD);
+	background = get_image(BACKGROUND);
 	i = 0;
-	while (i < frame->width / WIDTH)
+	while (i < background->width / WIDTH)
 	{
 		j = 0;
-		while (j < frame->height / HEIGHT)
+		while (j < background->height / HEIGHT)
 		{
-			draw_image(frame, road, i * WIDTH, j * HEIGHT);
+			draw_image(background, get_image(ROAD), i * WIDTH, j * HEIGHT);
 			j ++;
 		}
 	i ++;

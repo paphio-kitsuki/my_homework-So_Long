@@ -42,6 +42,8 @@
 # define WIDTH					80
 # define HEIGHT					80
 
+# define TRANSPARENCY			0xFF
+
 # define BACKGROUND				0
 # define ROAD					1
 # define PLAYER					2
@@ -92,10 +94,14 @@ void		delete_image(t_frame *frame, t_image *image);
 void		images_destroy(t_frame *frame);
 int			images_create(t_frame *frame);
 t_image		*get_image(int index);
-void		draw_image(t_frame *frame, t_image *src, int x, int y);
-void		draw_object(t_frame *frame, t_object *obj);
+void		draw_image(t_image *dst, t_image *src, int x, int y);
+void		draw_object(t_image *image, t_object *obj);
 void		put_pixel(t_image *image, int x, int y, UINT color);
 UINT		get_pixel(t_image *image, int x, int y);
+UCHAR		get_alpha(UINT argb);
+UCHAR		get_red(UINT argb);
+UCHAR		get_blue(UINT argb);
+UCHAR		get_green(UINT argb);
 t_list		*ft_lstnew(t_object *content);
 void		ft_lstadd_front(t_list **lst, t_list *new);
 int			ft_lstsize(t_list *lst);
