@@ -18,7 +18,15 @@ void	delete_image(t_frame *frame, t_image *image)
 	free(image);
 }
 
-void	delete_object(t_object *object)
+void	clear_list(int	**lst)
 {
-	free(object);
+	int	**tmp;
+
+	tmp = lst;
+	while (*tmp != NULL)
+	{
+		free(*tmp);
+		tmp++;
+	}
+	free(lst);
 }

@@ -12,16 +12,21 @@
 
 #include "so_long.h"
 
-void	move(t_frame *frame, t_object *obj, int x, int y)
+void	move(t_frame *frame, t_player *player, int x, int y)
 {
-	obj->x += x * WIDTH;
-	obj->y += y * HEIGHT;
-	if (obj->x < 0)
-		obj->x = 0;
-	else if (obj->x + WIDTH > frame->width)
-		obj->x = frame->width - WIDTH;
-	else if (obj->y < 0)
-		obj->y = 0;
-	else if (obj->y + HEIGHT > frame->height)
-		obj->y = frame->height - HEIGHT;
+	player->x += x;
+	player->y += y;
+	if (player->x < 0)
+		player->x = 0;
+	else if (player->x >= frame->width)
+		player->x = frame->width - 1;
+	else if (player->y < 0)
+		player->y = 0;
+	else if (player->y >= frame->height)
+		player->y = frame->height - 1;
+	if (frame->list[player->x][player->y] == WALL)
+	{
+		player->x -= x;
+		player->y -= y;
+	}
 }

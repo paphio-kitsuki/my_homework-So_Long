@@ -12,14 +12,14 @@
 
 #include "so_long.h"
 
-t_list	*ft_lstnew(t_object *content)
+t_list	*ft_lstnew(char	*str)
 {
 	t_list	*out;
 
 	out = (t_list *)malloc(sizeof(t_list));
 	if (out == NULL)
 		return (NULL);
-	out->content = content;
+	out->str = str;
 	out->next = NULL;
 	return (out);
 }

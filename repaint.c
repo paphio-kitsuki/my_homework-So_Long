@@ -11,23 +11,30 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
 
 static int	clear_background(void);
 
 int	repaint(t_frame *f)
 {
-	t_list	*lst;
 	t_image	*background;
+	int		i;
+	int		j;
 
 	clear_background();
 	background = get_image(BACKGROUND);
-	lst = f->list;
-	while (lst != NULL)
+	i = 0;
+	while (i < f->width)
 	{
-		draw_object(background, lst->content);
-		lst = lst->next;
+		j = 0;
+		while (j < f->height)
+		{
+			if (f->list[i][j] != ROAD)
+				draw_image(background, get_image(f->list[i][j]), i, j);
+			j ++;
+		}
+		i ++;
 	}
+	draw_image(background, f->player->image, f->player->x, f->player->y);
 	mlx_put_image_to_window(f->mlx, f->win, background->image, 0, 0);
 	return (0);
 }

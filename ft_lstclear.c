@@ -12,16 +12,54 @@
 
 #include "so_long.h"
 
-void	ft_lstclear(t_frame *frame, void (*del)(t_object *))
+static void	ft_lstdelone(t_list *lst)
+{
+	if (lst == NULL)
+		return ;
+	if (lst->str != NULL)
+		free(lst->str);
+	free(lst);
+}
+
+void	ft_lstclear(t_list	**lst)
 {
 	t_list	*tmp;
 
-	if (frame == NULL || del == NULL)
+	if (lst == NULL)
 		return ;
-	while (frame->list != NULL)
+	while (*lst != NULL)
 	{
-		tmp = frame->list->next;
-		lstdelone(frame, del);
-		frame->list = tmp;
+		tmp = (*lst)->next;
+		ft_lstdelone(*lst);
+		*lst = tmp;
 	}
+}
+
+t_list	*ft_lstfix(t_list *lst)
+{
+	t_list	*tmp;
+
+	if (lst == NULL)
+		return (NULL);
+	while (lst != NULL && *(lst->str) == '\0')
+	{
+		tmp = lst->next;
+		ft_lstdelone(lst);
+		lst = tmp;
+	}
+	while (lst != NULL && *(ft_lstlast(lst)->str) == '\0')
+	{
+		tmp = lst;
+		if (tmp->next == NULL)
+		{
+			ft_lstdelone(tmp);
+			lst = NULL;
+			break ;
+		}
+		while (tmp->next->next != NULL)
+			tmp = tmp->next;
+		ft_lstdelone(tmp->next);
+		tmp->next = NULL;
+	}
+	return (lst);
 }

@@ -15,7 +15,8 @@
 int	exit_func(t_frame *param)
 {
 	images_destroy(param);
-	ft_lstclear(param, delete_object);
+	clear_list(param->list);
+	free(param->player);
 	mlx_destroy_window(param->mlx, param->win);
 	mlx_destroy_display(param->mlx);
 	free(param);
@@ -30,32 +31,30 @@ int	key_notify(int button, t_frame *param)
 	if (button == ESCAPE)
 		exit_func(param);
 	else if (button == A || button == LEFT)
-		move(param, param->list->content, -1, 0);
+		move(param, param->player, -1, 0);
 	else if (button == D || button == RIGHT)
-		move(param, param->list->content, 1, 0);
+		move(param, param->player, 1, 0);
 	else if (button == W || button == UP)
-		move(param, param->list->content, 0, -1);
+		move(param, param->player, 0, -1);
 	else if (button == S || button == DOWN)
-		move(param, param->list->content, 0, 1);
+		move(param, param->player, 0, 1);
 	repaint(param);
 	return (0);
 }
 
-int	main(void)
+int	main(int argc, char *argv[])
 {	
 	t_frame	*frame;
 
+	if (argc != 2)
+		return (0);
 	frame = (t_frame *)malloc(sizeof(t_frame));
-	frame->width = WIDTH * 10;
-	frame->height = HEIGHT * 10;
 	frame->mlx = mlx_init();
+	frame->list = read_map(argv[1], &frame->width, &frame->height);
 	images_create(frame);
-	frame->list = ft_lstnew(create_object(0, 0, get_image(PLAYER)));
-	ft_lstadd_back(&(frame->list), ft_lstnew(create_object(160, 0, get_image(WALL))));
-	ft_lstadd_back(&(frame->list), ft_lstnew(create_object(320, 320, get_image(COLLECTION))));
-	ft_lstadd_back(&(frame->list), ft_lstnew(create_object(80, 640, get_image(GOAL))));
-	frame->win = mlx_new_window(frame->mlx, frame->width, frame->height, "mlx 42");
-	mlx_hook(frame->win, CLIENT_MESSAGE, STRUCTURE_NOTIFY_MASK, exit_func, frame);
+	frame->player = create_player(frame->list, frame->width);
+	frame->win = mlx_new_window(frame->mlx, frame->width * WIDTH, frame->height * HEIGHT, "mlx 42");
+	mlx_hook(frame->win, CLIENT_MESSAGE, 1L<<17, exit_func, frame);
 	mlx_key_hook(frame->win, key_notify, frame);
 	mlx_expose_hook(frame->win, repaint, frame);
 	mlx_loop(frame->mlx);
