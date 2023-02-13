@@ -47,10 +47,10 @@
 # define BACKGROUND				0
 # define ROAD					1
 # define PLAYER					2
-# define LENGTH					3
-# define WALL					4
-# define GOAL					5
-# define COLLECTION				6
+# define WALL					3
+# define GOAL					4
+# define COLLECTION				5
+# define LENGTH					6
 
 typedef struct s_image
 {

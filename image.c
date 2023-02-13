@@ -23,11 +23,11 @@ static void	set_image(t_frame *f, t_image *images[], int index)
 	else if (index == PLAYER)
 		images[PLAYER] = create_image(f, "./player.xpm");
 	else if (index == WALL)
-		images[WALL] = create_image(f, "./road.xpm");
+		images[WALL] = create_image(f, "./wall.xpm");
 	else if (index == GOAL)
-		images[GOAL] = create_image(f, "./road.xpm");
+		images[GOAL] = create_image(f, "./goal.xpm");
 	else if (index == COLLECTION)
-		images[COLLECTION] = create_image(f, "./road.xpm");
+		images[COLLECTION] = create_image(f, "./collection.xpm");
 }
 
 int	images_create(t_frame *frame)
