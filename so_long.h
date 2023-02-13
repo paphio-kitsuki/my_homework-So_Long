@@ -73,7 +73,7 @@ typedef struct s_player
 	int		x;
 	int		y;
 	t_image	*image;
-	size_t	move_count;
+	int		move_count;
 }			t_player;
 
 typedef struct s_frame
@@ -125,6 +125,7 @@ UCHAR		get_blue(UINT argb);
 UCHAR		get_green(UINT argb);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*ft_strrchr(const char *s, int c);
+char		*ft_itoa(int n);
 t_list		*ft_lstnew(char *str);
 int			ft_lstsize(t_list *lst);
 void		ft_lstadd_back(t_list **lst, t_list *newone);
