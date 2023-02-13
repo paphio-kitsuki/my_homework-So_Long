@@ -73,7 +73,7 @@ static int	**create_list(t_list *buffer, int *width, int *height)
 	int		**out;
 
 	size = ft_lstsize(buffer);
-	out = (char **)malloc(sizeof (char *) * (size + 1));
+	out = (int **)malloc(sizeof (int *) * (size + 1));
 	if (out == NULL)
 		return (NULL);
 	count = 0;

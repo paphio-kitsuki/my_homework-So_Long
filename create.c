@@ -42,7 +42,7 @@ static void	search_player_point(int **map, int width, int *x, int *y)
 	while (*(map + *x) != NULL)
 	{
 		*y = 0;
-		while (y < width)
+		while (*y < width)
 		{
 			if (map[*x][*y] == 'P')
 			{
