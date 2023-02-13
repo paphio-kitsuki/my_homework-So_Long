@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
 
 void	put_pixel(t_image *image, int x, int y, UINT color)
 {
@@ -30,12 +29,13 @@ UINT	get_pixel(t_image *image, int x, int y)
 	if (image == NULL || image->url == NULL)
 		return (0);
 	tmp = image->url + (y * image->length + x * (image->bpp / 8));
-	printf("%p\n\n", tmp);
 	return (*(UINT *)tmp);
 }
 
-void	draw_image(t_image *dst, t_image *src, int x, int y)
+void	draw_image(t_frame *f, t_image *src, int x, int y)
 {
+	mlx_put_image_to_window(f->mlx, f->win, src->image, x, y);
+	/*
 	int		i;
 	int		j;
 	UINT	color;
@@ -48,14 +48,15 @@ void	draw_image(t_image *dst, t_image *src, int x, int y)
 		{
 			color = 0;
 			//color = get_pixel(src->image, i, j);
-			put_pixel(dst, i + x, j + y, color);
+			put_pixel(f, i + x, j + y, color);
 			j ++;
 		}
 		i ++;
 	}
+	*/
 }
 
-void	draw_object(t_image *image, t_object *obj)
+void	draw_object(t_frame *frame, t_object *obj)
 {
-	draw_image(image, obj->image, obj->x, obj->y);
+	draw_image(frame, obj->image, obj->x, obj->y);
 }
