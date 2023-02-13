@@ -146,5 +146,7 @@ static int	get_number(int *dst, char *src, size_t ct, int *f)
 		dst[ct] = GOAL;
 	else if (src[ct] == 'P')
 		dst[ct] = PLAYER;
+	else
+		return (-1);
 	return (0);
 }

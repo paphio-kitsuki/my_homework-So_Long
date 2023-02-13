@@ -35,25 +35,38 @@ void	ft_lstclear(t_list	**lst)
 	}
 }
 
-t_list	*ft_lstfix(t_list *lst)
+static void	ft_lstiter(t_list *lst)
+{
+	char	*tmp;
+
+	while (lst != NULL)
+	{
+		tmp = ft_strrchr(lst->str, '\n');
+		if (tmp != NULL)
+			*tmp = '\0';
+		lst = lst->next;
+	}
+}
+
+void	ft_lstfix(t_list **lst)
 {
 	t_list	*tmp;
 
-	if (lst == NULL)
+	if (lst == NULL || *lst == NULL)
 		return (NULL);
-	while (lst != NULL && *(lst->str) == '\0')
+	while (*lst != NULL && *((*lst)->str) == '\0')
 	{
-		tmp = lst->next;
-		ft_lstdelone(lst);
-		lst = tmp;
+		tmp = (*lst)->next;
+		ft_lstdelone(*lst);
+		*lst = tmp;
 	}
-	while (lst != NULL && *(ft_lstlast(lst)->str) == '\0')
+	while (*lst != NULL && *(ft_lstlast(*lst)->str) == '\0')
 	{
-		tmp = lst;
+		tmp = *lst;
 		if (tmp->next == NULL)
 		{
 			ft_lstdelone(tmp);
-			lst = NULL;
+			*lst = NULL;
 			break ;
 		}
 		while (tmp->next->next != NULL)
@@ -61,5 +74,5 @@ t_list	*ft_lstfix(t_list *lst)
 		ft_lstdelone(tmp->next);
 		tmp->next = NULL;
 	}
-	return (lst);
+	ft_lstiter(*lst);
 }

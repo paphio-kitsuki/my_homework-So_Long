@@ -122,7 +122,7 @@ int			ft_lstsize(t_list *lst);
 void		ft_lstadd_back(t_list **lst, t_list *newone);
 void		ft_lstclear(t_list **lst);
 t_list		*ft_lstlast(t_list *lst);
-t_list		*ft_lstfix(t_list *lst);
+void		ft_lstfix(t_list **lst);
 char		*get_next_line(int fd);
 char		*search_newline(char *s);
 size_t		ft_strlen(const char *str);
