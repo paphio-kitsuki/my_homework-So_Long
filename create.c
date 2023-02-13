@@ -49,9 +49,9 @@ static void	search_player_point(int **map, int height, int *x, int *y)
 				map[*x][*y] = 0;
 				return ;
 			}
-			*y ++;
+			(*y)++;
 		}
-		*x ++;
+		(*x)++;
 	}
 	*x = -1;
 	*y = -1;
