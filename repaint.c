@@ -18,14 +18,14 @@ static int	clear_background(t_frame *frame);
 int	repaint(t_frame *f)
 {
 	t_list	*lst;
-	t_image	*background;
+	//t_image	*background;
 
 	clear_background(f);
 	//background = get_image(BACKGROUND);
 	lst = f->list;
 	while (lst != NULL)
 	{
-		draw_object(background, lst->content);
+		draw_object(f, lst->content);
 		lst = lst->next;
 	}
 	//mlx_put_image_to_window(f->mlx, f->win, background->image, 0, 0);
