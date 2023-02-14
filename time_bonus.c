@@ -15,25 +15,22 @@
 
 int	pass_time(t_frame *frame)
 {
-	static struct timespec	time;
-	static int				flag = 0;
-	struct timespec			now;
+	static struct timespec		time;
+	static unsigned long long int	past_count = 0;
+	unsigned long long int		now_count;
 
 	if (frame->status != PLAYING)
 		return (0);
-	if (flag == 0)
-	{
-		clock_gettime(CLOCK_REALTIME, &time);
-		flag = 1;
-	}
-	clock_gettime(CLOCK_REALTIME, &now);
-	if (now.tv_nsec > time.tv_nsec + 500 * 1000 * 1000)
+	clock_gettime(CLOCK_REALTIME, &time);
+	now_count = time.tv_sec * 1000 * 1000 * 1000 + time.tv_nsec;
+	if (now_count - past_count > 500 * 1000 * 1000)
 	{
 		if (frame->player->direction % 2 == 0)
 			frame->player->direction += 1;
 		else
 			frame->player->direction -= 1;
-		time = now;
+		past_count = now_count;
+		repaint(frame);
 	}
 	return (0);
 }
