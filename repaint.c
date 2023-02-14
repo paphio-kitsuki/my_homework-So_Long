@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-static int	clear_background(void);
+static void	clear_background(void);
 
 int	repaint(t_frame *f)
 {
@@ -23,10 +23,10 @@ int	repaint(t_frame *f)
 	clear_background();
 	background = get_image(BACKGROUND);
 	i = 0;
-	while (i < f->width)
+	while (i < (int)(f->width))
 	{
 		j = 0;
-		while (j < f->height)
+		while (j < (int)(f->height))
 		{
 			if ((f->list)[j][i] != ROAD)
 				draw_image(background, get_image((f->list)[j][i]), i, j);
@@ -39,7 +39,7 @@ int	repaint(t_frame *f)
 	return (0);
 }
 
-static int	clear_background(void)
+static void	clear_background(void)
 {
 	t_image	*background;
 	int		i;

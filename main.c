@@ -22,7 +22,7 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		error(ARGUMENT, NULL);
 	frame = setup_frame(argv[1]);
-	mlx_hook(frame->win, CLIENT_MESSAGE, 1L<<17, exit_func, frame);
+	mlx_hook(frame->win, CLIENT_MESSAGE, 1L << 17, exit_func, frame);
 	mlx_key_hook(frame->win, key_notify, frame);
 	mlx_expose_hook(frame->win, repaint, frame);
 	mlx_loop(frame->mlx);

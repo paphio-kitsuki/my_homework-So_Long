@@ -15,23 +15,37 @@
 t_image	*create_image(t_frame *f, char *path)
 {
 	t_image	*i;
+
 	i = (t_image *)malloc(sizeof(t_image));
 	if (i == NULL)
 		return (NULL);
 	i->image = mlx_xpm_file_to_image(f->mlx, path, &i->width, &i->height);
+	if (i->image == NULL)
+	{
+		free(i);
+		return (NULL);
+	}
 	i->path = mlx_get_data_addr(i->image, &i->bpp, &i->length, &i->endian);
 	return (i);
 }
 
-t_image	*create_empty_image(t_frame *f, int width, int height)
+t_image	*create_empty_image(t_frame *f, size_t width, size_t height)
 {
 	t_image	*i;
+
+	if (width > INT_MAX / WIDTH || height > INT_MAX / HEIGHT)
+		return (NULL);
 	i = (t_image *)malloc(sizeof(t_image));
 	if (i == NULL)
 		return (NULL);
-	i->width = width;
-	i->height = height;
+	i->width = (int)(width * WIDTH);
+	i->height = (int)(height * HEIGHT);
 	i->image = mlx_new_image(f->mlx, i->width, i->height);
+	if (i->image == NULL)
+	{
+		free(i);
+		return (NULL);
+	}
 	i->path = mlx_get_data_addr(i->image, &i->bpp, &i->length, &i->endian);
 	return (i);
 }

@@ -13,16 +13,16 @@
 #include "so_long.h"
 
 static t_list	*create_readlines(const char *path);
-static int		**create_list(t_list *buffer, int *w, int *h, UINT *check);
-static int		*create_numberline(t_list *buf, UINT *checker, int *length);
+static int		**create_list(t_list *buffer, size_t *w, size_t *h, UINT *f);
+static int		*create_numberline(t_list *buf, UINT *check, size_t *length);
 static int		get_number(int *dst, char *src, size_t ct, UINT *flag);
 
-int	**read_map(const char *path, int *width, int *height)
+int	**read_map(const char *path, size_t *width, size_t *height)
 {
 	int		**out;
 	t_list	*buffer;
 	char	*tmp;
-	UINT	checker;
+	UINT	flag;
 
 	if (path == NULL)
 		return (NULL);
@@ -33,10 +33,10 @@ int	**read_map(const char *path, int *width, int *height)
 	ft_lstfix(&buffer);
 	if (buffer == NULL)
 		return (NULL);
-	*width = -1;
-	out = create_list(buffer, width, height, &checker);
+	*width = 0;
+	out = create_list(buffer, width, height, &flag);
 	ft_lstclear(&buffer);
-	if (out != NULL && (checker & 14) != 14)
+	if (out != NULL && (flag & 14) != 14)
 		clear_list(&out);
 	return (out);
 }
@@ -68,13 +68,13 @@ static t_list	*create_readlines(const char *path)
 	return (out);
 }
 
-static int	**create_list(t_list *buffer, int *width, int *height, UINT *checker)
+static int	**create_list(t_list *buffer, size_t *w, size_t *h, UINT *flag)
 {
 	size_t	count;
 	size_t	size;
 	int		**out;
 
-	*checker = 0;
+	*flag = 0;
 	size = ft_lstsize(buffer);
 	out = (int **)malloc(sizeof (int *) * (size + 1));
 	if (out == NULL)
@@ -83,7 +83,7 @@ static int	**create_list(t_list *buffer, int *width, int *height, UINT *checker)
 	while (count < size)
 	{
 		out[count + 1] = NULL;
-		out[count] = create_numberline(buffer, checker, width);
+		out[count] = create_numberline(buffer, flag, w);
 		if (out[count] == NULL)
 		{
 			clear_list(&out);
@@ -92,30 +92,30 @@ static int	**create_list(t_list *buffer, int *width, int *height, UINT *checker)
 		buffer = buffer->next;
 		count ++;
 	}
-	*height = size;
+	*h = size;
 	return (out);
 }
 
-static int	*create_numberline(t_list *buf, UINT *checker, int *length)
+static int	*create_numberline(t_list *buf, UINT *flag, size_t *length)
 {
 	int		*out;
 	size_t	count;
 
-	if (buf == NULL || checker == NULL || length == NULL)
+	if (buf == NULL || flag == NULL || length == NULL)
 		return (NULL);
-	*checker &= ~(UINT)1;
-	if (*length == -1 || buf->next == NULL)
-		*checker |= 1;
+	*flag &= ~(UINT)1;
+	if (*length == 0 || buf->next == NULL)
+		*flag |= 1;
 	*length = ft_strlen(buf->str);
 	if (buf->next != NULL && *length != ft_strlen(buf->next->str))
 		return (NULL);
-	out = (int *)malloc(sizeof (int) * (*length +  1));
+	out = (int *)malloc(sizeof (int) * (*length + 1));
 	if (out == NULL)
 		return (NULL);
 	count = 0;
 	while (count < *length)
 	{
-		if (get_number(out, buf->str, count++, checker) < 0)
+		if (get_number(out, buf->str, count++, flag) < 0)
 		{
 			free(out);
 			return (NULL);

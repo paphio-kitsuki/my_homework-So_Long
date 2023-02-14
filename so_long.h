@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <limits.h>
 
 # define UINT			unsigned int
 # define UCHAR			unsigned char
@@ -92,8 +93,8 @@ typedef struct s_frame
 {
 	void		*mlx;
 	void		*win;
-	int			width;
-	int			height;
+	size_t		width;
+	size_t		height;
 	int			**list;
 	t_player	*player;
 }			t_frame;
@@ -114,7 +115,7 @@ typedef struct s_memo
 
 void		error(int index, t_frame *frame);
 void		case_of_clear(int index, t_frame *frame);
-int			**read_map(const char *path, int *width, int *height);
+int			**read_map(const char *path, size_t *width, size_t *height);
 int			is_possible(int **map);
 int			search(int **list, int target);
 int			move(t_frame *frame, int x, int y);
@@ -122,7 +123,7 @@ void		action(t_frame *frame);
 int			exit_func(t_frame *param);
 int			repaint(t_frame *frame);
 t_image		*create_image(t_frame *f, char *path);
-t_image		*create_empty_image(t_frame *f, int width, int height);
+t_image		*create_empty_image(t_frame *f, size_t width, size_t height);
 t_player	*create_player(int **map);
 void		delete_image(t_frame *frame, t_image *image);
 void		clear_list(int	***lst);
