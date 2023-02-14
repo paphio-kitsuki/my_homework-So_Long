@@ -59,8 +59,7 @@ static t_frame	*setup_frame(char *address)
 
 static int	key_notify(int button, t_frame *param)
 {
-	int		ismoved;
-	char	*tmp;
+	int	ismoved;
 
 	ismoved = 0;
 	if (button == ESCAPE)
