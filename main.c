@@ -12,19 +12,58 @@
 
 #include "so_long.h"
 
+static int		key_notify(int button, t_frame *param);
+static t_frame	*setup_frame(char *address);
+
+int	main(int argc, char *argv[])
+{
+	t_frame	*frame;
+
+	if (argc != 2)
+		error(ARGUMENT, NULL);
+	frame = setup_frame(argv[1]);
+	mlx_hook(frame->win, CLIENT_MESSAGE, 1L<<17, exit_func, frame);
+	mlx_key_hook(frame->win, key_notify, frame);
+	mlx_expose_hook(frame->win, repaint, frame);
+	mlx_loop(frame->mlx);
+}
+
+static t_frame	*setup_frame(char *address)
+{
+	t_frame	*frame;
+	int		width;
+	int		height;
+
+	frame = (t_frame *)malloc(sizeof(t_frame));
+	if (frame == NULL)
+		error(FRAMECREATE, NULL);
+	frame->mlx = mlx_init();
+	if (frame->mlx == NULL)
+		error(MLXCREATE, frame);
+	frame->list = read_map(address, &frame->width, &frame->height);
+	if (frame->list == NULL)
+		error(FILECASE, frame);
+	if (is_possible(frame->list) <= 0)
+		error(NOTPOSSIBLE, frame);
+	if (images_create(frame) < 0)
+		error(IMAGECREATE, frame);
+	frame->player = create_player(frame->list);
+	if (frame->player == NULL)
+		error(PLAYERCREATE, frame);
+	width = frame->width * WIDTH;
+	height = frame->height * HEIGHT;
+	frame->win = mlx_new_window(frame->mlx, width, height, TITLE);
+	return (frame);
+}
+
 int	exit_func(t_frame *param)
 {
-	images_destroy(param);
-	clear_list(&(param->list));
-	free(param->player);
-	mlx_destroy_window(param->mlx, param->win);
-	mlx_destroy_display(param->mlx);
-	free(param);
+	case_of_clear(DELETE_ALL, param);
 	exit(0);
 	return (0);
 }
 
-int	key_notify(int button, t_frame *param)
+static int	key_notify(int button, t_frame *param)
 {
 	int	ismoved;
 
@@ -44,23 +83,4 @@ int	key_notify(int button, t_frame *param)
 	if (ismoved > 0)
 		action(param);
 	return (0);
-}
-
-int	main(int argc, char *argv[])
-{	
-	t_frame	*frame;
-
-	if (argc != 2)
-		return (0);
-	frame = (t_frame *)malloc(sizeof(t_frame));
-	frame->mlx = mlx_init();
-	frame->list = read_map(argv[1], &frame->width, &frame->height);
-	images_create(frame);
-	int x = is_possible(frame->list);
-	frame->player = create_player(frame->list);
-	frame->win = mlx_new_window(frame->mlx, frame->width * WIDTH, frame->height * HEIGHT, "mlx 42");
-	mlx_hook(frame->win, CLIENT_MESSAGE, 1L<<17, exit_func, frame);
-	mlx_key_hook(frame->win, key_notify, frame);
-	mlx_expose_hook(frame->win, repaint, frame);
-	mlx_loop(frame->mlx);
 }

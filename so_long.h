@@ -16,46 +16,58 @@
 # include "mlx/mlx.h"
 # include <unistd.h>
 # include <stdlib.h>
-# include <math.h>
 # include <fcntl.h>
 
-# define UINT					unsigned int
-# define UCHAR					unsigned char
+# define UINT			unsigned int
+# define UCHAR			unsigned char
 
-# define STDOUT					1
+# define STDOUT			1
+# define STDERR			2
 
-# define DESTROY_NOTIFY			17
-# define CLIENT_MESSAGE			33
+# define DESTROY_NOTIFY	17
+# define CLIENT_MESSAGE	33
 
-# define NOEVENT_MASK			0
+# define NOEVENT_MASK	0
 
-# define W						119
-# define A						97
-# define S						115
-# define D						100
+# define TITLE			"42_so_long"
 
-# define LEFT					65361
-# define UP						65362
-# define RIGHT					65363
-# define DOWN					65364
+# define W				119
+# define A				97
+# define S				115
+# define D				100
 
-# define ESCAPE					65307
+# define LEFT			65361
+# define UP				65362
+# define RIGHT			65363
+# define DOWN			65364
 
-# define WIDTH					80
-# define HEIGHT					80
+# define ESCAPE			65307
 
-# define TRANSPARENCY			0xFF
+# define WIDTH			80
+# define HEIGHT			80
 
-# define NONE					-1
-# define BACKGROUND				0
-# define ROAD					1
-# define PLAYER					2
-# define WALL					3
-# define GOAL					4
-# define COLLECTION				5
-# define LENGTH					6
+# define TRANSPARENCY	0xFF
 
-# define BUFFER_SIZE			10
+# define NONE			-1
+# define BACKGROUND		0
+# define ROAD			1
+# define PLAYER			2
+# define WALL			3
+# define GOAL			4
+# define COLLECTION		5
+# define LENGTH			6
+
+# define BUFFER_SIZE	10
+
+# define ARGUMENT		0
+# define FRAMECREATE	1
+# define MLXCREATE		2
+# define FILECASE		3
+# define NOTPOSSIBLE	4
+# define IMAGECREATE	5
+# define PLAYERCREATE	6
+# define WINCREATE		7
+# define DELETE_ALL		8
 
 typedef struct s_image
 {
@@ -100,6 +112,8 @@ typedef struct s_memo
 	struct s_memo	*next;
 }					t_memo;
 
+void		error(int index, t_frame *frame);
+void		case_of_clear(int index, t_frame *frame);
 int			**read_map(const char *path, int *width, int *height);
 int			is_possible(int **map);
 int			search(int **list, int target);

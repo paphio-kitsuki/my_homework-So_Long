@@ -13,7 +13,7 @@
 #include "so_long.h"
 
 static t_list	*create_readlines(const char *path);
-static int		**create_list(t_list *buffer, int *width, int *height);
+static int		**create_list(t_list *buffer, int *w, int *h, UINT *check);
 static int		*create_numberline(t_list *buf, UINT *checker, int *length);
 static int		get_number(int *dst, char *src, size_t ct, UINT *flag);
 
@@ -22,6 +22,7 @@ int	**read_map(const char *path, int *width, int *height)
 	int		**out;
 	t_list	*buffer;
 	char	*tmp;
+	UINT	checker;
 
 	if (path == NULL)
 		return (NULL);
@@ -33,8 +34,10 @@ int	**read_map(const char *path, int *width, int *height)
 	if (buffer == NULL)
 		return (NULL);
 	*width = -1;
-	out = create_list(buffer, width, height);
+	out = create_list(buffer, width, height, &checker);
 	ft_lstclear(&buffer);
+	if (out != NULL && checker & 14 != 14)
+		clear_list(&out);
 	return (out);
 }
 
@@ -65,14 +68,13 @@ static t_list	*create_readlines(const char *path)
 	return (out);
 }
 
-static int	**create_list(t_list *buffer, int *width, int *height)
+static int	**create_list(t_list *buffer, int *width, int *height, UINT *checker)
 {
 	size_t	count;
 	size_t	size;
-	UINT	checker;
 	int		**out;
 
-	checker = 0;
+	*checker = 0;
 	size = ft_lstsize(buffer);
 	out = (int **)malloc(sizeof (int *) * (size + 1));
 	if (out == NULL)
@@ -81,7 +83,7 @@ static int	**create_list(t_list *buffer, int *width, int *height)
 	while (count < size)
 	{
 		out[count + 1] = NULL;
-		out[count] = create_numberline(buffer, &checker, width);
+		out[count] = create_numberline(buffer, checker, width);
 		if (out[count] == NULL)
 		{
 			clear_list(&out);
