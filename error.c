@@ -14,23 +14,23 @@
 
 void	error(int index, t_frame *frame)
 {
-	ft_putstrln("Error\n", STDERR);
+	ft_putstrln("Error", STDERR);
 	if (index == ARGUMENT)
-		ft_putstrln("Too Many Or Few Arguments.\n", STDERR);
+		ft_putstrln("Too Many Or Few Arguments.", STDERR);
 	else if (index == FRAMECREATE)
-		ft_putstrln("Failed To Allocate A Frame.\n", STDERR);
+		ft_putstrln("Failed To Allocate A Frame.", STDERR);
 	else if (index == MLXCREATE)
-		ft_putstrln("Failed To Make A Mlx.\n", STDERR);
+		ft_putstrln("Failed To Make A Mlx.", STDERR);
 	else if (index == FILECASE)
-		ft_putstrln("Path Or Mapcase Are Illegal.\n", STDERR);
+		ft_putstrln("Path Or Mapcase Are Illegal.", STDERR);
 	else if (index == NOTPOSSIBLE)
-		ft_putstrln("There Are No Valid Routes.\n", STDERR);
+		ft_putstrln("There Are No Valid Routes.", STDERR);
 	else if (index == IMAGECREATE)
-		ft_putstrln("Failed To Make Images.\n", STDERR);
+		ft_putstrln("Failed To Make Images.", STDERR);
 	else if (index == PLAYERCREATE)
-		ft_putstrln("Failed To Allocate A Player.\n", STDERR);
+		ft_putstrln("Failed To Allocate A Player.", STDERR);
 	else if (index == WINCREATE)
-		ft_putstrln("Failed To Make A Window.\n", STDERR);
+		ft_putstrln("Failed To Make A Window.", STDERR);
 	case_of_clear(index, frame);
 	exit(0);
 }
