@@ -69,18 +69,20 @@ static void	paint_player(t_image *background, t_player *player)
 	UINT	color;
 
 	x = player->x * WIDTH;
-	y = player->y * HEIGHT;
 	i = (player->direction % 2) * WIDTH;
-	while (i < WIDTH)
+	while (x / WIDTH <= player->x)
 	{
+		y = player->y * HEIGHT;
 		j = (player->direction / 2) * HEIGHT;
-		while (j < HEIGHT)
+		while (y / HEIGHT <= player->y)
 		{
 			color = get_pixel(player->image, i, j);
 			if (get_alpha(color) != TRANSPARENCY)
-				put_pixel(background, i + x, j + y, color);
+				put_pixel(background, x, y, color);
 			j ++;
+			y ++;
 		}
 		i ++;
+		x ++;
 	}
 }

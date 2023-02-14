@@ -17,7 +17,7 @@ int	pass_time(t_frame *frame)
 {
 	static struct timespec	time;
 	static int				flag = 0;
-	struct timespec			now;
+	//struct timespec			now;
 
 	if (flag == 0)
 		clock_gettime(CLOCK_REALTIME, &time);
