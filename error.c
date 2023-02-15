@@ -40,6 +40,8 @@ void	case_of_clear(int index, t_frame *frame)
 	set_count(NULL);
 	if (frame == NULL)
 		return ;
+	if (index >= DELETE_ALL)
+		mlx_loop_end(frame->mlx);
 	if (index >= WINCREATE)
 		free(frame->player);
 	if (index >= PLAYERCREATE)
