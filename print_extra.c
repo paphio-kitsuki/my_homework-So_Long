@@ -22,9 +22,6 @@ static int	g_y;
 
 void	print_extra(t_frame *frame, char *str)
 {
-	t_image	*background;
-
-	background = frame->images[BACKGROUND];
 	if (frame->status == FAILURE)
 		print_failure(frame);
 	else
