@@ -36,7 +36,7 @@ int	move(t_frame *frame, int x, int y)
 		frame->player->x -= x;
 		frame->player->y -= y;
 	}
-	else if (x != 0 && y != 0)
+	else if (x != 0 || y != 0)
 		tmp = 1;
 	set_direction(frame, x, y);
 	return (tmp);
