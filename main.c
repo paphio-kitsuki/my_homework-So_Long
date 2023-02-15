@@ -54,6 +54,7 @@ static t_frame	*setup_frame(char *address)
 	set_window(frame);
 	frame->status = PLAYING;
 	frame->filepath = address;
+	set_count(ft_itoa(0));
 	return (frame);
 }
 
@@ -99,8 +100,8 @@ static void	restart(t_frame *frame)
 	y = frame->player->firsty;
 	free(frame->player);
 	frame->list[y][x] = PLAYER;
-	x = 0;
-	while (x < frame->width)
+	x = -1;
+	while (++x < frame->width)
 	{
 		y = -1;
 		while (++y < frame->height)
@@ -108,7 +109,6 @@ static void	restart(t_frame *frame)
 			if (frame->list[y][x] == COLLECTED)
 				frame->list[y][x] = COLLECTION;
 		}
-		x ++;
 	}
 	frame->player = create_player(frame->images[PLAYER], frame->list);
 	if (frame->player == NULL)
@@ -116,5 +116,6 @@ static void	restart(t_frame *frame)
 		mlx_destroy_window(frame->mlx, frame->win);
 		error(PLAYERCREATE, frame);
 	}
+	set_count(ft_itoa(0));
 	frame->status = PLAYING;
 }
