@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-static void	printstr_scale(t_frame *f, const char *str, int color, int size);
+static void	printstr_scale(t_frame *f, char *str, int color, int size);
 static void	print_failure(t_frame *f);
 static void	print_clear(t_frame *f);
 
@@ -44,7 +44,7 @@ void	print_extra(t_frame *f, char *str)
 	}
 }
 
-static void	printstr_scale(t_frame *f, const char *str, int color, int size)
+static void	printstr_scale(t_frame *f, char *str, int color, int size)
 {
 	int	i;
 	int	j;
@@ -68,9 +68,10 @@ static void	printstr_scale(t_frame *f, const char *str, int color, int size)
 
 static void	print_failure(t_frame *f)
 {
-	const char	*str = "Oops, You Got The Eternal Life...";
-	t_image		*background;
+	char	*str;
+	t_image	*background;
 
+	str = "Oops, You Got The Eternal Life...";
 	background = f->images[BACKGROUND];
 	add_color_all(background, FAILURE_COLOR);
 	mlx_put_image_to_window(f->mlx, f->win, background->image, 0, 0);
@@ -85,8 +86,9 @@ static void	print_failure(t_frame *f)
 
 static void	print_clear(t_frame *f)
 {
-	const char	*str = "Complete! You Are A Super Astronaut!";
+	const char	*str;
 
+	str = "Complete! You Are A Super Astronaut!";
 	mlx_get_screen_size(f->mlx, &g_x, &g_y);
 	g_x = g_x / 2 - 100;
 	g_y = g_y / 2 - 10;
