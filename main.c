@@ -88,9 +88,6 @@ static void	set_window(t_frame *frame)
 	int		width;
 	int		height;
 
-	frame->title = ft_substr(TITLE, 0, ft_strlen(TITLE));
-	if (frame->title == NULL)
-		error(WINCREATE, frame);
 	if (frame->width > LIMIT_W / WIDTH)
 		width = LIMIT_W / WIDTH;
 	else
@@ -101,10 +98,7 @@ static void	set_window(t_frame *frame)
 		height = frame->height;
 	width *= WIDTH;
 	height *= HEIGHT;
-	frame->win = mlx_new_window(frame->mlx, width, height, frame->title);
+	frame->win = mlx_new_window(frame->mlx, width, height, TITLE);
 	if (frame->win == NULL)
-	{
-		free(frame->title);
 		error(WINCREATE, frame);
-	}
 }

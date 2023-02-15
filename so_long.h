@@ -116,7 +116,6 @@ typedef struct s_frame
 {
 	void		*mlx;
 	void		*win;
-	char		*title;
 	size_t		width;
 	size_t		height;
 	int			**list;
