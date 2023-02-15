@@ -98,8 +98,8 @@ static int	**create_list(t_list *buffer, int *w, int *h, UINT *flag)
 
 static int	*create_numberline(t_list *buf, UINT *flag, int *length)
 {
-	int		*out;
-	size_t	count;
+	int	*out;
+	int	count;
 
 	if (buf == NULL || flag == NULL || length == NULL)
 		return (NULL);
