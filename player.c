@@ -39,9 +39,21 @@ int	move(t_frame *frame, int x, int y)
 
 void	action(t_frame *frame)
 {
+	char	*tmp;
+
 	frame->player->move_count ++;
 	ft_putstr("Move Count : ", STDOUT);
-	ft_putstrln(ft_itoa(frame->player->move_count), STDOUT);
+	tmp = ft_itoa(frame->player->move_count);
+	if (tmp != NULL)
+	{
+		if (ISBONUS == 0)
+		{
+			ft_putstrln(tmp, STDOUT);
+			free(tmp);
+		}
+		else
+			set_count(tmp);
+	}
 	if ((frame->list)[frame->player->y][frame->player->x] == COLLECTION)
 		(frame->list)[frame->player->y][frame->player->x] = ROAD;
 	else if ((frame->list)[frame->player->y][frame->player->x] == GOAL)

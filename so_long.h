@@ -61,7 +61,8 @@
 # define WALL			3
 # define GOAL			4
 # define COLLECTION		5
-# define LENGTH			6
+# define ENEMY			6
+# define LENGTH			7
 
 # define BUFFER_SIZE	10
 
@@ -74,6 +75,14 @@
 # define PLAYERCREATE	6
 # define WINCREATE		7
 # define DELETE_ALL		8
+
+# define STRX			10
+# define STRY			30
+# define STRCOLOR		0x00000000
+
+# ifndef ISBONUS
+#  define ISBONUS		0
+# endif
 
 typedef struct s_image
 {
@@ -124,6 +133,8 @@ int			**read_map(const char *path, size_t *width, size_t *height);
 int			is_possible(int **map);
 int			search(int **list, int target);
 int			move(t_frame *frame, int x, int y);
+void		set_count(char *str);
+char		*get_count(void);
 void		action(t_frame *frame);
 int			exit_func(t_frame *param);
 int			repaint(t_frame *frame);

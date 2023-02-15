@@ -129,9 +129,7 @@ static int	get_number(int *dst, char *src, size_t ct, UINT *f)
 {
 	if ((ct == 0 || ct == ft_strlen(src) - 1 || *f % 2 == 1) && src[ct] != '1')
 		return (-1);
-	if ((*f >> 1) % 2 == 1 && src[ct] == 'E')
-		return (-1);
-	if ((*f >> 2) % 2 == 1 && src[ct] == 'P')
+	if (((*f & 2) == 1 && src[ct] == 'E') || ((*f & 4) == 1 && src[ct] == 'P'))
 		return (-1);
 	if (src[ct] == 'E')
 		*f += 2;
@@ -149,6 +147,8 @@ static int	get_number(int *dst, char *src, size_t ct, UINT *f)
 		dst[ct] = GOAL;
 	else if (src[ct] == 'P')
 		dst[ct] = PLAYER;
+	else if (ISBONUS > 0 && src[ct] == 'N')
+		dst[ct] = ENEMY;
 	else
 		return (-1);
 	return (0);

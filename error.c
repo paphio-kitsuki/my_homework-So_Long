@@ -37,6 +37,7 @@ void	error(int index, t_frame *frame)
 
 void	case_of_clear(int index, t_frame *frame)
 {
+	set_count(NULL);
 	if (frame == NULL)
 		return ;
 	if (index >= WINCREATE)

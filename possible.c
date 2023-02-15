@@ -57,7 +57,7 @@ static void	start(int ***dst, int **src, int width)
 		x = 0;
 		while (src[y][x] != NONE)
 		{
-			if (src[y][x] == WALL)
+			if (src[y][x] == WALL || src[y][x] == ENEMY)
 				(*dst)[y][x] = -1;
 			else
 				(*dst)[y][x] = (src[y][x] == PLAYER) & 1;
