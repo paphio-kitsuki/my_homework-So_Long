@@ -32,8 +32,6 @@ int	main(int argc, char *argv[])
 static t_frame	*setup_frame(char *address)
 {
 	t_frame	*frame;
-	int		width;
-	int		height;
 
 	frame = (t_frame *)malloc(sizeof(t_frame));
 	if (frame == NULL)
