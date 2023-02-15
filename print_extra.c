@@ -22,6 +22,7 @@ static int	g_y;
 void	print_extra(t_frame *f, char *str)
 {
 	t_image	*background;
+	char	*tmp;
 
 	background = f->images[BACKGROUND];
 	if (f->status == FAILURE)
@@ -32,16 +33,19 @@ void	print_extra(t_frame *f, char *str)
 		if (f->status == CLEAR)
 			print_clear(f);
 	}
-	if (str != NULL)
+	tmp = ft_substr(MOVE_STR, 0, ft_strlen(MOVE_STR));
+	if (str != NULL && tmp != NULL)
 	{
 		mlx_get_screen_size(f->mlx, &g_x, &g_y);
 		g_x -= 200;
 		g_y -= 100;
-		printstr_scale(f, MOVE_STR, STREDGECOLOR, 5);
+		printstr_scale(f, tmp, STREDGECOLOR, 5);
 		printstr_scale(f, str, STREDGECOLOR, 5);
-		printstr_scale(f, MOVE_STR, STRCOLOR, 2);
+		printstr_scale(f, tmp, STRCOLOR, 2);
 		printstr_scale(f, str, STRCOLOR, 2);
 	}
+	if (tmp != NULL)
+		free(tmp);
 }
 
 static void	printstr_scale(t_frame *f, char *str, int color, int size)
@@ -72,16 +76,18 @@ static void	print_failure(t_frame *f)
 	t_image	*background;
 
 	str = "Oops, You Got The Eternal Life...";
+	str = ft_substr(str, 0, ft_strlen(str));
 	background = f->images[BACKGROUND];
 	add_color_all(background, FAILURE_COLOR);
 	mlx_put_image_to_window(f->mlx, f->win, background->image, 0, 0);
+	if (str == NULL)
+		return ;
 	mlx_get_screen_size(f->mlx, &g_x, &g_y);
 	g_x = g_x / 2 - 100;
 	g_y = g_y / 2 - 10;
-	printstr_scale(f, MOVE_STR, STREDGECOLOR, 5);
 	printstr_scale(f, str, STREDGECOLOR, 5);
-	printstr_scale(f, MOVE_STR, STRCOLOR, 2);
 	printstr_scale(f, str, STRCOLOR, 2);
+	free(str);
 }
 
 static void	print_clear(t_frame *f)
@@ -89,9 +95,13 @@ static void	print_clear(t_frame *f)
 	const char	*str;
 
 	str = "Complete! You Are A Super Astronaut!";
+	str = ft_substr(str, 0, ft_strlen(str));
+	if (str == NULL)
+		return ;
 	mlx_get_screen_size(f->mlx, &g_x, &g_y);
 	g_x = g_x / 2 - 100;
 	g_y = g_y / 2 - 10;
 	printstr_scale(f, str, STREDGECOLOR, 5);
 	printstr_scale(f, str, STRCOLOR, 2);
+	free(str);
 }

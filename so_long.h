@@ -50,6 +50,9 @@
 
 # define ESCAPE			65307
 
+# define LIMIT_W		1000
+# define LIMIT_H		500
+
 # define WIDTH			80
 # define HEIGHT			80
 
@@ -113,6 +116,7 @@ typedef struct s_frame
 {
 	void		*mlx;
 	void		*win;
+	char		*title;
 	size_t		width;
 	size_t		height;
 	int			**list;

@@ -44,6 +44,7 @@ int	move(t_frame *frame, int x, int y)
 void	action(t_frame *frame)
 {
 	char	*tmp;
+	char	*tmp2;
 
 	frame->player->move_count ++;
 	tmp = ft_itoa(frame->player->move_count);
@@ -51,8 +52,13 @@ void	action(t_frame *frame)
 	{
 		if (ISBONUS == 0)
 		{
-			ft_putstr(MOVE_STR, STDOUT);
-			ft_putstrln(tmp, STDOUT);
+			tmp2 = ft_substr(MOVE_STR, 0, ft_strlen(MOVE_STR));
+			if (tmp2 != NULL)
+			{
+				ft_putstr(tmp2, STDOUT);
+				ft_putstrln(tmp, STDOUT);
+				free(tmp2);
+			}
 			free(tmp);
 		}
 		else

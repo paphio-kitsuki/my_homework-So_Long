@@ -14,6 +14,7 @@
 
 static int		key_notify(int button, t_frame *param);
 static t_frame	*setup_frame(char *address);
+static void		set_window(t_frame *frame);
 
 int	main(int argc, char *argv[])
 {
@@ -50,9 +51,7 @@ static t_frame	*setup_frame(char *address)
 	frame->player = create_player(frame->images[PLAYER], frame->list);
 	if (frame->player == NULL)
 		error(PLAYERCREATE, frame);
-	width = frame->width * WIDTH;
-	height = frame->height * HEIGHT;
-	frame->win = mlx_new_window(frame->mlx, width, height, TITLE);
+	set_window(frame);
 	frame->status = PLAYING;
 	return (frame);
 }
@@ -84,4 +83,30 @@ static int	key_notify(int button, t_frame *param)
 	if (ismoved > 0)
 		action(param);
 	return (0);
+}
+
+static void	set_window(t_frame *frame)
+{
+	int		width;
+	int		height;
+
+	frame->title = ft_substr(TITLE, 0, ft_strlen(TITLE));
+	if (frame->title == NULL)
+		error(WINCREATE, frame);
+	if (frame->width > LIMIT_W / WIDTH)
+		width = LIMIT_W / WIDTH;
+	else
+		width = frame->width;	
+	if (frame->height > LIMIT_H / HEIGHT)
+		height = LIMIT_H / HEIGHT;
+	else
+		height = frame->height;
+	width *= WIDTH;
+	height *= HEIGHT;
+	frame->win = mlx_new_window(frame->mlx, width, height, frame->title);
+	if (frame->win == NULL)
+	{
+		free(frame->title);
+		error(WINCREATE, frame);
+	}
 }
