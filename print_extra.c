@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-static void	printstr_with_scale(t_frame *f, char *str, int color, int size);
+static void	printstr_scale(t_frame *f, const char *str, int color, int size);
 static void	print_failure(t_frame *f);
 static void	print_clear(t_frame *f);
 
@@ -37,14 +37,14 @@ void	print_extra(t_frame *f, char *str)
 		mlx_get_screen_size(f->mlx, &g_x, &g_y);
 		g_x -= 200;
 		g_y -= 100;
-		printstr_with_scale(f, MOVE_STR, STREDGECOLOR, 5);
-		printstr_with_scale(f, str, STREDGECOLOR, 5);
-		printstr_with_scale(f, MOVE_STR, STRCOLOR, 2);
-		printstr_with_scale(f, str, STRCOLOR, 2);
+		printstr_scale(f, MOVE_STR, STREDGECOLOR, 5);
+		printstr_scale(f, str, STREDGECOLOR, 5);
+		printstr_scale(f, MOVE_STR, STRCOLOR, 2);
+		printstr_scale(f, str, STRCOLOR, 2);
 	}
 }
 
-static void	printstr_with_scale(t_frame *f, char *str, int color, int size)
+static void	printstr_scale(t_frame *f, const char *str, int color, int size)
 {
 	int	i;
 	int	j;
@@ -77,10 +77,10 @@ static void	print_failure(t_frame *f)
 	mlx_get_screen_size(f->mlx, &g_x, &g_y);
 	g_x = g_x / 2 - 100;
 	g_y = g_y / 2 - 10;
-	printstr_with_scale(f, MOVE_STR, STREDGECOLOR, 5);
-	printstr_with_scale(f, str, STREDGECOLOR, 5);
-	printstr_with_scale(f, MOVE_STR, STRCOLOR, 2);
-	printstr_with_scale(f, str, STRCOLOR, 2);
+	printstr_scale(f, MOVE_STR, STREDGECOLOR, 5);
+	printstr_scale(f, str, STREDGECOLOR, 5);
+	printstr_scale(f, MOVE_STR, STRCOLOR, 2);
+	printstr_scale(f, str, STRCOLOR, 2);
 }
 
 static void	print_clear(t_frame *f)
@@ -90,6 +90,6 @@ static void	print_clear(t_frame *f)
 	mlx_get_screen_size(f->mlx, &g_x, &g_y);
 	g_x = g_x / 2 - 100;
 	g_y = g_y / 2 - 10;
-	printstr_with_scale(f, str, STREDGECOLOR, 5);
-	printstr_with_scale(f, str, STRCOLOR, 2);
+	printstr_scale(f, str, STREDGECOLOR, 5);
+	printstr_scale(f, str, STRCOLOR, 2);
 }
