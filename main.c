@@ -15,6 +15,7 @@
 static int		key_notify(int button, t_frame *param);
 static t_frame	*setup_frame(char *address);
 static void		set_window(t_frame *frame);
+static void		restart(t_frame *frame);
 
 int	main(int argc, char *argv[])
 {
@@ -52,25 +53,20 @@ static t_frame	*setup_frame(char *address)
 		error(PLAYERCREATE, frame);
 	set_window(frame);
 	frame->status = PLAYING;
+	frame->filepath = address;
 	return (frame);
-}
-
-int	exit_func(t_frame *param)
-{
-	case_of_clear(DELETE_ALL, param);
-	exit(0);
-	return (0);
 }
 
 static int	key_notify(int button, t_frame *param)
 {
-	int	ismoved;
+	int		ismoved;
+	char	*tmp;
 
-	if (param->list == NULL)
-		return (-1);
 	ismoved = 0;
 	if (button == ESCAPE)
 		exit_func(param);
+	else if (button == R && param->status != PLAYING && ISBONUS > 0)
+		restart(param);
 	else if (button == A || button == LEFT)
 		ismoved = move(param, -1, 0);
 	else if (button == D || button == RIGHT)
@@ -93,4 +89,33 @@ static void	set_window(t_frame *frame)
 	frame->win = mlx_new_window(frame->mlx, width, height, TITLE);
 	if (frame->win == NULL)
 		error(WINCREATE, frame);
+}
+
+static void	restart(t_frame *frame)
+{
+	int	x;
+	int	y;
+
+	x = frame->player->firstx;
+	y = frame->player->firsty;
+	free(frame->player);
+	frame->list[y][x] = PLAYER;
+	x = 0;
+	while (x < frame->width)
+	{
+		y = -1;
+		while (++y < frame->height)
+		{
+			if (frame->list[y][x] == COLLECTED)
+				frame->list[y][x] = COLLECTION;
+		}
+		x ++;
+	}
+	frame->player = create_player(frame->images[PLAYER], frame->list);
+	if (frame->player == NULL)
+	{
+		mlx_destroy_window(frame->mlx, frame->win);
+		error(PLAYERCREATE, frame);
+	}
+	frame->status = PLAYING;
 }

@@ -42,6 +42,7 @@
 # define A				97
 # define S				115
 # define D				100
+# define R				114
 
 # define LEFT			65361
 # define UP				65362
@@ -67,6 +68,7 @@
 # define COLLECTION		5
 # define ENEMY			6
 # define LENGTH			7
+# define COLLECTED		8
 
 # define BUFFER_SIZE	10
 
@@ -109,6 +111,8 @@ typedef struct s_player
 {
 	int		x;
 	int		y;
+	int		firstx;
+	int		firsty;
 	t_image	*image;
 	int		move_count;
 	int		direction;
@@ -124,6 +128,7 @@ typedef struct s_frame
 	t_image		**images;
 	t_player	*player;
 	int			status;
+	char		*filepath;
 }				t_frame;
 
 typedef struct s_list
@@ -147,7 +152,7 @@ int			is_possible(int **map);
 void		get_framesize(t_frame *frame, int *width, int *height);
 int			search(int **list, int target);
 int			move(t_frame *frame, int x, int y);
-void		set_direction(t_player *player, int x, int y);
+void		set_direction(t_frame *frame, int x, int y);
 void		set_count(char *str);
 char		*get_count(void);
 void		action(t_frame *frame);

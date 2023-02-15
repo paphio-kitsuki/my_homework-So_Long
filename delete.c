@@ -31,3 +31,10 @@ void	clear_list(int	***lst)
 	free(*lst);
 	*lst = NULL;
 }
+
+int	exit_func(t_frame *param)
+{
+	case_of_clear(DELETE_ALL, param);
+	exit(0);
+	return (0);
+}

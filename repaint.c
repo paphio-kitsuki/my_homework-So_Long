@@ -24,13 +24,13 @@ int	repaint(t_frame *f)
 	clear_background(f);
 	background = f->images[BACKGROUND];
 	i = 0;
-	while (i < (int)(f->width))
+	while (i < f->width)
 	{
 		j = 0;
-		while (j < (int)(f->height))
+		while (j < f->height)
 		{
-			if ((f->list)[j][i] != ROAD)
-				draw_image(background, f->images[(f->list)[j][i]], i, j);
+			if (f->list[j][i] != ROAD && f->list[j][i] != COLLECTED)
+				draw_image(background, f->images[f->list[j][i]], i, j);
 			j ++;
 		}
 		i ++;
