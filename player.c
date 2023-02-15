@@ -16,11 +16,13 @@ static void	judge(t_frame *frame);
 
 int	move(t_frame *frame, int x, int y)
 {
+	int	tmp;
+
 	if (frame == NULL || frame->status != PLAYING)
 		return (0);
 	frame->player->x += x;
 	frame->player->y += y;
-	set_direction(frame, x, y);
+	tmp = 0;
 	if (frame->player->x < 0)
 		frame->player->x = 0;
 	else if (frame->player->x >= (int)(frame->width))
@@ -34,9 +36,10 @@ int	move(t_frame *frame, int x, int y)
 		frame->player->x -= x;
 		frame->player->y -= y;
 	}
-	else
-		return (1);
-	return (0);
+	else if (x != 0 && y != 0)
+		tmp = 1;
+	set_direction(frame, x, y);
+	return (tmp);
 }
 
 void	action(t_frame *frame)
