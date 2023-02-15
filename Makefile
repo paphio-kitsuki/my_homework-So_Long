@@ -1,6 +1,6 @@
 NAME	= so_long
 MLX_DIR	= mlx_linux
-SRCS	= color.c create.c delete.c draw.c error.c ft_itoa.c ft_lstclear.c ft_lstnew.c ft_lstsize.c ft_putstrln.c ft_strncmp.c ft_strrchr.c get_next_line_utils.c get_next_line.c image.c main.c map.c player.c possible.c repaint.c save_count.c search.c
+SRCS	= color.c create.c delete.c draw.c error.c ft_itoa.c ft_lstclear.c ft_lstnew.c ft_lstsize.c ft_putstrln.c ft_strncmp.c ft_strrchr.c get_next_line_utils.c get_next_line.c image.c main.c map.c player.c possible.c print_extra.c repaint.c save_count.c search.c
 OBJS	= $(SRCS:.c=.o)
 RM		= rm -f
 CC		= gcc

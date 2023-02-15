@@ -36,8 +36,7 @@ int	repaint(t_frame *f)
 	}
 	draw_image(background, f->player->image, f->player->x, f->player->y);
 	mlx_put_image_to_window(f->mlx, f->win, background->image, 0, 0);
-	if (get_count() != NULL)
-		mlx_string_put(f->mlx, f->win, STRX, STRY, STRCOLOR, get_count());
+	print_extra(f, get_count());
 	return (0);
 }
 

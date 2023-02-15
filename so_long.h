@@ -79,6 +79,7 @@
 # define STRX			10
 # define STRY			30
 # define STRCOLOR		0x00000000
+# define STREDGECOLOR	0x00FFFFFF
 
 # ifndef ISBONUS
 #  define ISBONUS		0
@@ -138,6 +139,7 @@ char		*get_count(void);
 void		action(t_frame *frame);
 int			exit_func(t_frame *param);
 int			repaint(t_frame *frame);
+void		print_extra(t_frame *frame, char *str);
 t_image		*create_image(t_frame *f, char *path);
 t_image		*create_empty_image(t_frame *f, size_t width, size_t height);
 t_player	*create_player(int **map);
