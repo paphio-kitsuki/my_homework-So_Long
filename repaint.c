@@ -76,7 +76,7 @@ static void	paint_player(t_image *background, t_player *player)
 		j = (player->direction / 2) * HEIGHT;
 		while (j < HEIGHT)
 		{
-			color = get_pixel(player, i, j);
+			color = get_pixel(player->image, i, j);
 			if (get_alpha(color) != TRANSPARENCY)
 				put_pixel(background, i + x, j + y, color);
 			j ++;
