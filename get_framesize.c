@@ -16,7 +16,7 @@ void	get_framesize(t_frame *frame, int *width, int *height)
 {
 	mlx_get_screen_size(frame->mlx, width, height);
 	*width -= 10;
-	*height -= 30;
+	*height -= 50;
 	if (frame->width <= *width / WIDTH)
 		*width = frame->width * WIDTH;
 	if (frame->height <= *height / HEIGHT)
