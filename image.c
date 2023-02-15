@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-static void	set_image(t_frame *f, t_image *images[], int index)
+static void	set_image(t_frame *f, int index)
 {
 	if (index == BACKGROUND)
 		f->images[BACKGROUND] = create_empty_image(f, f->width, f->height);
@@ -41,7 +41,7 @@ int	images_create(t_frame *frame)
 	while (count < LENGTH)
 	{
 		frame->images[count + 1] = NULL;
-		set_image(frame, frame->images, count);
+		set_image(frame, count);
 		if (frame->images[count] == NULL)
 		{
 			images_destroy(frame);
