@@ -142,6 +142,8 @@ void		error(int index, t_frame *frame);
 void		case_of_clear(int index, t_frame *frame);
 int			**read_map(const char *path, size_t *width, size_t *height);
 int			is_possible(int **map);
+int			get_framewidth(t_frame *frame);
+int			get_frameheight(t_frame *frame);
 int			search(int **list, int target);
 int			move(t_frame *frame, int x, int y);
 void		set_count(char *str);

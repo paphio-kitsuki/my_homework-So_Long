@@ -85,19 +85,11 @@ static int	key_notify(int button, t_frame *param)
 
 static void	set_window(t_frame *frame)
 {
-	int		width;
-	int		height;
+	int	width;
+	int	height;
 
-	if (frame->width > LIMIT_W / WIDTH)
-		width = LIMIT_W / WIDTH;
-	else
-		width = frame->width;	
-	if (frame->height > LIMIT_H / HEIGHT)
-		height = LIMIT_H / HEIGHT;
-	else
-		height = frame->height;
-	width *= WIDTH;
-	height *= HEIGHT;
+	width = get_framewidth(frame);
+	height = get_frameheight(frame);
 	frame->win = mlx_new_window(frame->mlx, width, height, TITLE);
 	if (frame->win == NULL)
 		error(WINCREATE, frame);
