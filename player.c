@@ -72,7 +72,11 @@ static void	judge(t_frame *frame)
 	else if ((frame->list)[frame->player->y][frame->player->x] == GOAL)
 	{
 		if (search(frame->list, COLLECTION) == 0)
+		{
 			frame->status = CLEAR;
+			if (ISBONUS == 0)
+				exit_func(frame);
+		}
 	}
 }
 
