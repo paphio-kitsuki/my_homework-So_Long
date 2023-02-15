@@ -15,7 +15,7 @@
 static t_list	*create_readlines(const char *path);
 static int		**create_list(t_list *buffer, int *w, int *h, UINT *f);
 static int		*create_numberline(t_list *buf, UINT *check, int *length);
-static int		get_number(int *dst, char *src, int ct, UINT *flag);
+static int		get_number(int *dst, char *src, size_t ct, UINT *flag);
 
 int	**read_map(const char *path, int *width, int *height)
 {
@@ -99,7 +99,7 @@ static int	**create_list(t_list *buffer, int *w, int *h, UINT *flag)
 static int	*create_numberline(t_list *buf, UINT *flag, int *length)
 {
 	int		*out;
-	int	count;
+	size_t	count;
 
 	if (buf == NULL || flag == NULL || length == NULL)
 		return (NULL);
@@ -107,7 +107,7 @@ static int	*create_numberline(t_list *buf, UINT *flag, int *length)
 	if (*length == 0 || buf->next == NULL)
 		*flag |= 1;
 	*length = ft_strlen(buf->str);
-	if (buf->next != NULL && *length != ft_strlen(buf->next->str))
+	if (buf->next != NULL && *length != (int)ft_strlen(buf->next->str))
 		return (NULL);
 	out = (int *)malloc(sizeof (int) * (*length + 1));
 	if (out == NULL)
@@ -125,7 +125,7 @@ static int	*create_numberline(t_list *buf, UINT *flag, int *length)
 	return (out);
 }
 
-static int	get_number(int *dst, char *src, int ct, UINT *f)
+static int	get_number(int *dst, char *src, size_t ct, UINT *f)
 {
 	if ((ct == 0 || ct == ft_strlen(src) - 1 || *f % 2 == 1) && src[ct] != '1')
 		return (-1);
