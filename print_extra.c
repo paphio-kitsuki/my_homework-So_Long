@@ -92,10 +92,10 @@ static void	print_failure(t_frame *f)
 
 static void	print_clear(t_frame *f)
 {
-	const char	*str;
+	char	*str;
 
 	str = "Complete! You Are A Super Astronaut!";
-	str = ft_substr(str, 0, ft_strlen(str));
+	//str = ft_substr(str, 0, ft_strlen(str));
 	if (str == NULL)
 		return ;
 	mlx_get_screen_size(f->mlx, &g_x, &g_y);
