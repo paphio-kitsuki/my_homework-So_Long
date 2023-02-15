@@ -13,6 +13,7 @@
 #include "so_long.h"
 
 static void	clear_background(t_frame *frame);
+static void	paint_player(t_image *background, t_player *player);
 
 int	repaint(t_frame *f)
 {
@@ -34,7 +35,7 @@ int	repaint(t_frame *f)
 		}
 		i ++;
 	}
-	draw_image(background, f->player->image, f->player->x, f->player->y);
+	paint_player(background, f->player);
 	print_extra(f, get_count());
 	return (0);
 }
@@ -56,5 +57,30 @@ static void	clear_background(t_frame *frame)
 			j ++;
 		}
 	i ++;
+	}
+}
+
+static void	paint_player(t_image *background, t_player *player)
+{
+	int		i;
+	int		j;
+	int		x;
+	int		y;
+	UINT	color;
+
+	x = player->x * WIDTH;
+	y = player->y * HEIGHT;
+	i = (player->direction % 2) * WIDTH;
+	while (i < WIDTH)
+	{
+		j = (player->direction / 2) * HEIGHT;
+		while (j < HEIGHT)
+		{
+			color = get_pixel(player, i, j);
+			if (get_alpha(color) != TRANSPARENCY)
+				put_pixel(background, i + x, j + y, color);
+			j ++;
+		}
+		i ++;
 	}
 }

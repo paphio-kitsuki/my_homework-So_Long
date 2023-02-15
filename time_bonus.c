@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_framesize.c                                    :+:      :+:    :+:   */
+/*   time_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kitsuki <kitsuki@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 18:06:07 by kitsuki           #+#    #+#             */
-/*   Updated: 2023/02/15 18:06:07 by kitsuki          ###   ########.fr       */
+/*   Created: 2023/02/15 21:37:29 by kitsuki           #+#    #+#             */
+/*   Updated: 2023/02/15 21:37:29 by kitsuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <time.h>
 
-void	get_framesize(t_frame *frame, int *width, int *height)
+int	pass_time(t_frame *frame)
 {
-	mlx_get_screen_size(frame->mlx, width, height);
-	*width -= 10;
-	*height -= 30;
-	if (frame->width <= *width / WIDTH)
-		*width = frame->width * WIDTH;
-	if (frame->height <= *height / HEIGHT)
-		*height = frame->height * HEIGHT;
+	static struct timespec	time;
+	static int				flag = 0;
+	struct timespec			now;
+
+	if (flag == 0)
+		clock_gettime(CLOCK_REALTIME, &time);
+	if (frame->status != PLAYING)
+		return (0);
+	return (0);
 }

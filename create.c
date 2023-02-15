@@ -92,5 +92,6 @@ t_player	*create_player(t_image *image, int **map)
 	out->x = x;
 	out->y = y;
 	out->move_count = 0;
+	out->direction = 2 * 3 + 0;
 	return (out);
 }

@@ -84,6 +84,7 @@
 # define STREDGECOLOR	0x00FFFFFF
 
 # define FAILURE_COLOR	0x00500000
+# define CLEAR_COLOR	0x00005050
 
 # define PLAYING		0
 # define CLEAR			1
@@ -110,6 +111,7 @@ typedef struct s_player
 	int		y;
 	t_image	*image;
 	int		move_count;
+	int		direction;
 }			t_player;
 
 typedef struct s_frame
@@ -145,6 +147,7 @@ int			is_possible(int **map);
 void		get_framesize(t_frame *frame, int *width, int *height);
 int			search(int **list, int target);
 int			move(t_frame *frame, int x, int y);
+void		set_direction(t_player *player, int x, int y);
 void		set_count(char *str);
 char		*get_count(void);
 void		action(t_frame *frame);
@@ -182,5 +185,6 @@ char		*ft_substr(char const *str, unsigned int start, size_t len);
 int			memo_join(t_memo *s1, char *s2);
 void		ft_putstrln(char *s, int fd);
 void		ft_putstr(char *s, int fd);
+int			pass_time(t_frame *frame);
 
 #endif

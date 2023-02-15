@@ -33,11 +33,12 @@ void	print_extra(t_frame *frame, char *str)
 	if (str != NULL)
 	{
 		get_framesize(frame, &g_x, &g_y);
-		g_x -= 200;
-		g_y -= 100;
-		printstr_scale(frame, MOVE_STR, STREDGECOLOR, 5);
-		printstr_scale(frame, str, STREDGECOLOR, 5);
+		g_x -= 150;
+		g_y -= 50;
+		printstr_scale(frame, MOVE_STR, STREDGECOLOR, 4);
 		printstr_scale(frame, MOVE_STR, STRCOLOR, 2);
+		g_x += 80;
+		printstr_scale(frame, str, STREDGECOLOR, 4);
 		printstr_scale(frame, str, STRCOLOR, 2);
 	}
 }
@@ -75,20 +76,24 @@ static void	print_failure(t_frame *frame)
 	adjust_window(frame);
 	get_framesize(frame, &g_x, &g_y);
 	g_x = g_x / 2 - 100;
-	g_y = g_y / 2 - 10;
-	printstr_scale(frame, str, STREDGECOLOR, 5);
+	g_y /= 2;
+	printstr_scale(frame, str, STREDGECOLOR, 4);
 	printstr_scale(frame, str, STRCOLOR, 2);
 }
 
 static void	print_clear(t_frame *frame)
 {
 	char	*str;
+	t_image	*background;
 
 	str = "Complete! You Are A Super Astronaut!";
+	background = frame->images[BACKGROUND];
+	add_color_all(background, CLEAR_COLOR);
+	adjust_window(frame);
 	get_framesize(frame, &g_x, &g_y);
-	g_x = g_x / 2 - 100;
-	g_y = g_y / 2 - 10;
-	printstr_scale(frame, str, STREDGECOLOR, 5);
+	g_x = g_x / 2 - 110;
+	g_y /= 2;
+	printstr_scale(frame, str, STREDGECOLOR, 4);
 	printstr_scale(frame, str, STRCOLOR, 2);
 }
 
@@ -101,16 +106,16 @@ static void	adjust_window(t_frame *frame)
 	t_image	*bgd;
 
 	get_framesize(frame, &width, &height);
-	x = - frame->player->x * WIDTH + (width - WIDTH) / 2;
+	x = -frame->player->x * WIDTH + (width - WIDTH) / 2;
 	if (frame->width <= width / WIDTH || x > 0)
 		x = 0;
-	else if (x < - frame->width * WIDTH + width)
-		x = - frame->width * WIDTH + width;
-	y = - frame->player->y * HEIGHT + (height - HEIGHT) / 2;
+	else if (x < -frame->width * WIDTH + width)
+		x = -frame->width * WIDTH + width;
+	y = -frame->player->y * HEIGHT + (height - HEIGHT) / 2;
 	if (frame->height <= height / HEIGHT || y > 0)
 		y = 0;
-	else if (y < - frame->height * HEIGHT + height)
-		y = - frame->height * HEIGHT + height;
+	else if (y < -frame->height * HEIGHT + height)
+		y = -frame->height * HEIGHT + height;
 	bgd = frame->images[BACKGROUND];
 	mlx_put_image_to_window(frame->mlx, frame->win, bgd->image, x, y);
 }

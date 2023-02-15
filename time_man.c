@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_framesize.c                                    :+:      :+:    :+:   */
+/*   man.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kitsuki <kitsuki@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 18:06:07 by kitsuki           #+#    #+#             */
-/*   Updated: 2023/02/15 18:06:07 by kitsuki          ###   ########.fr       */
+/*   Created: 2023/02/15 21:34:25 by kitsuki           #+#    #+#             */
+/*   Updated: 2023/02/15 21:34:25 by kitsuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	get_framesize(t_frame *frame, int *width, int *height)
+int	pass_time(t_frame *frame)
 {
-	mlx_get_screen_size(frame->mlx, width, height);
-	*width -= 10;
-	*height -= 30;
-	if (frame->width <= *width / WIDTH)
-		*width = frame->width * WIDTH;
-	if (frame->height <= *height / HEIGHT)
-		*height = frame->height * HEIGHT;
+	return (frame->status);
 }

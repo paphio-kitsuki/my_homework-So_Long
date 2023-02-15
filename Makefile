@@ -1,5 +1,9 @@
 NAME	= so_long
 MLX_DIR	= mlx_linux
+MAN_SRC = time_man.c
+MAN_OBJ	= $(MAN_SRC:.c=.o)
+BNS_SRC = time_bonus.c
+BNS_OBJ	= $(BNS_SRC:.c=.o)
 SRCS	= color.c create.c delete.c draw.c error.c ft_itoa.c ft_lstclear.c ft_lstnew.c ft_lstsize.c ft_putstrln.c ft_strncmp.c ft_strrchr.c get_framesize.c get_next_line_utils.c get_next_line.c image.c main.c map.c player.c possible.c print_extra.c repaint.c save_count.c search.c
 OBJS	= $(SRCS:.c=.o)
 RM		= rm -f
@@ -13,7 +17,12 @@ ifneq ($(OS),Windows_NT)
 endif
 
 ifdef WITH_BONUS
- CFLAGS += -D ISBONUS=1
+ CFLAGS += -lrt -D ISBONUS=1
+ SRCS += BNS_SRC
+ OBJS += BNS_OBJ
+else
+ SRCS += MAN_SRC
+ OBJS += MAN_OBJ
 endif
 
 all: ${NAME}
@@ -23,7 +32,7 @@ ${NAME}: ${OBJS}
 	${CC} $^ ${CFLAGS} -o $@
 
 clean:
-	${RM} ${OBJS}
+	${RM} ${OBJS} ${BNS_OBJ}
 	cd ${PWD}/${MLX_DIR} && ${MAKE} $@
 	cd ${PWD}
 

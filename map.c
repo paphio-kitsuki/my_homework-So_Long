@@ -72,7 +72,7 @@ static int	**create_list(t_list *buffer, int *w, int *h, UINT *flag)
 {
 	int	count;
 	int	size;
-	int		**out;
+	int	**out;
 
 	*flag = 0;
 	size = ft_lstsize(buffer);

@@ -23,6 +23,7 @@ int	move(t_frame *frame, int x, int y)
 	player = frame->player;
 	player->x += x;
 	player->y += y;
+	set_direction(player, x, y);
 	if (player->x < 0)
 		player->x = 0;
 	else if (player->x >= (int)(frame->width))
@@ -73,4 +74,18 @@ static void	judge(t_frame *frame)
 		if (search(frame->list, COLLECTION) == 0)
 			frame->status = CLEAR;
 	}
+}
+
+void	set_direction(t_player *player, int x, int y)
+{
+	if (ISBONUS == 0 || player == NULL)
+		return ;
+	if (x > 0)
+		player->direction = 2 * 0 + player->direction % 2;
+	else if (x < 0)
+		player->direction = 2 * 1 + player->direction % 2;
+	else if (y > 0)
+		player->direction = 2 * 2 + player->direction % 2;
+	else if (y < 0)
+		player->direction = 2 * 3 + player->direction % 2;
 }
