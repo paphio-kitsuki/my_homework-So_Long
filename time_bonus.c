@@ -15,9 +15,9 @@
 
 int	pass_time(t_frame *frame)
 {
-	static struct timespec		time;
+	static struct timespec			time;
 	static unsigned long long int	past_count = 0;
-	unsigned long long int		now_count;
+	unsigned long long int			now_count;
 
 	if (frame->status != PLAYING)
 		return (0);

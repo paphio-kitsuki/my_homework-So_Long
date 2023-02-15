@@ -17,17 +17,17 @@ static void	set_image(t_frame *f, int index)
 	if (index == BACKGROUND)
 		f->images[BACKGROUND] = create_empty_image(f, f->width, f->height);
 	if (index == ROAD)
-		f->images[ROAD] = create_image(f, "./images/road.xpm");
+		f->images[ROAD] = create_image(f, "./textures/road.xpm");
 	else if (index == PLAYER)
-		f->images[PLAYER] = create_image(f, "./images/player.xpm");
+		f->images[PLAYER] = create_image(f, "./textures/player.xpm");
 	else if (index == WALL)
-		f->images[WALL] = create_image(f, "./images/wall.xpm");
+		f->images[WALL] = create_image(f, "./textures/wall.xpm");
 	else if (index == GOAL)
-		f->images[GOAL] = create_image(f, "./images/goal.xpm");
+		f->images[GOAL] = create_image(f, "./textures/goal.xpm");
 	else if (index == COLLECTION)
-		f->images[COLLECTION] = create_image(f, "./images/collection.xpm");
+		f->images[COLLECTION] = create_image(f, "./textures/collection.xpm");
 	else if (index == ENEMY)
-		f->images[ENEMY] = create_image(f, "./images/enemy.xpm");
+		f->images[ENEMY] = create_image(f, "./textures/enemy.xpm");
 }
 
 int	images_create(t_frame *frame)
