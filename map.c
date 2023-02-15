@@ -13,11 +13,11 @@
 #include "so_long.h"
 
 static t_list	*create_readlines(const char *path);
-static int		**create_list(t_list *buffer, size_t *w, size_t *h, UINT *f);
-static int		*create_numberline(t_list *buf, UINT *check, size_t *length);
-static int		get_number(int *dst, char *src, size_t ct, UINT *flag);
+static int		**create_list(t_list *buffer, int *w, int *h, UINT *f);
+static int		*create_numberline(t_list *buf, UINT *check, int *length);
+static int		get_number(int *dst, char *src, int ct, UINT *flag);
 
-int	**read_map(const char *path, size_t *width, size_t *height)
+int	**read_map(const char *path, int *width, int *height)
 {
 	int		**out;
 	t_list	*buffer;
@@ -68,10 +68,10 @@ static t_list	*create_readlines(const char *path)
 	return (out);
 }
 
-static int	**create_list(t_list *buffer, size_t *w, size_t *h, UINT *flag)
+static int	**create_list(t_list *buffer, int *w, int *h, UINT *flag)
 {
-	size_t	count;
-	size_t	size;
+	int	count;
+	int	size;
 	int		**out;
 
 	*flag = 0;
@@ -96,10 +96,10 @@ static int	**create_list(t_list *buffer, size_t *w, size_t *h, UINT *flag)
 	return (out);
 }
 
-static int	*create_numberline(t_list *buf, UINT *flag, size_t *length)
+static int	*create_numberline(t_list *buf, UINT *flag, int *length)
 {
 	int		*out;
-	size_t	count;
+	int	count;
 
 	if (buf == NULL || flag == NULL || length == NULL)
 		return (NULL);
@@ -125,7 +125,7 @@ static int	*create_numberline(t_list *buf, UINT *flag, size_t *length)
 	return (out);
 }
 
-static int	get_number(int *dst, char *src, size_t ct, UINT *f)
+static int	get_number(int *dst, char *src, int ct, UINT *f)
 {
 	if ((ct == 0 || ct == ft_strlen(src) - 1 || *f % 2 == 1) && src[ct] != '1')
 		return (-1);

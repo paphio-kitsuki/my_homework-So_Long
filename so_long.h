@@ -116,8 +116,8 @@ typedef struct s_frame
 {
 	void		*mlx;
 	void		*win;
-	size_t		width;
-	size_t		height;
+	int			width;
+	int			height;
 	int			**list;
 	t_image		**images;
 	t_player	*player;
@@ -140,7 +140,7 @@ typedef struct s_memo
 
 void		error(int index, t_frame *frame);
 void		case_of_clear(int index, t_frame *frame);
-int			**read_map(const char *path, size_t *width, size_t *height);
+int			**read_map(const char *path, int *width, int *height);
 int			is_possible(int **map);
 int			get_framewidth(t_frame *frame);
 int			get_frameheight(t_frame *frame);
