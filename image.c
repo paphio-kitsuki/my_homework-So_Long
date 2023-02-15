@@ -12,41 +12,37 @@
 
 #include "so_long.h"
 
-static t_image		**g_images;
-
 static void	set_image(t_frame *f, t_image *images[], int index)
 {
 	if (index == BACKGROUND)
-		images[BACKGROUND] = create_empty_image(f, f->width, f->height);
+		f->images[BACKGROUND] = create_empty_image(f, f->width, f->height);
 	if (index == ROAD)
-		images[ROAD] = create_image(f, "./images/road.xpm");
+		f->images[ROAD] = create_image(f, "./images/road.xpm");
 	else if (index == PLAYER)
-		images[PLAYER] = create_image(f, "./images/player.xpm");
+		f->images[PLAYER] = create_image(f, "./images/player.xpm");
 	else if (index == WALL)
-		images[WALL] = create_image(f, "./images/wall.xpm");
+		f->images[WALL] = create_image(f, "./images/wall.xpm");
 	else if (index == GOAL)
-		images[GOAL] = create_image(f, "./images/goal.xpm");
+		f->images[GOAL] = create_image(f, "./images/goal.xpm");
 	else if (index == COLLECTION)
-		images[COLLECTION] = create_image(f, "./images/collection.xpm");
+		f->images[COLLECTION] = create_image(f, "./images/collection.xpm");
 	else if (index == ENEMY)
-		images[ENEMY] = create_image(f, "./images/enemy.xpm");
+		f->images[ENEMY] = create_image(f, "./images/enemy.xpm");
 }
 
 int	images_create(t_frame *frame)
 {
 	size_t	count;
 
-	g_images = (t_image **)malloc(sizeof(t_image *) * (LENGTH + 1));
-	if (g_images == NULL)
+	frame->images = (t_image **)malloc(sizeof(t_image *) * (LENGTH + 1));
+	if (frame->images == NULL)
 		return (-1);
-	count = 0;
-	while (count <= LENGTH)
-		g_images[count++] = NULL;
 	count = 0;
 	while (count < LENGTH)
 	{
-		set_image(frame, g_images, count);
-		if (g_images[count] == NULL)
+		frame->images[count + 1] = NULL;
+		set_image(frame, frame->images, count);
+		if (frame->images[count] == NULL)
 		{
 			images_destroy(frame);
 			return (-1);
@@ -56,17 +52,13 @@ int	images_create(t_frame *frame)
 	return (0);
 }
 
-t_image	*get_image(int index)
-{
-	return (g_images[index]);
-}
-
 void	images_destroy(t_frame *frame)
 {
 	size_t	count;
 
 	count = 0;
-	while (g_images[count] != NULL)
-		delete_image(frame, g_images[count++]);
-	free(g_images);
+	while (frame->images[count] != NULL)
+		delete_image(frame, frame->images[count++]);
+	free(frame->images);
+	frame->images = NULL;
 }

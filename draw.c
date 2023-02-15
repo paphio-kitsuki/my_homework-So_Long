@@ -12,6 +12,8 @@
 
 #include "so_long.h"
 
+static UINT	calc_color(UINT color1, UINT color2);
+
 void	put_pixel(t_image *image, int x, int y, UINT color)
 {
 	char	*tmp;
@@ -53,7 +55,47 @@ void	draw_image(t_image *dst, t_image *src, int x, int y)
 	}
 }
 
-void	draw_player(t_image *image, t_player *p)
+void	add_color_all(t_image *image, UINT color)
 {
-	draw_image(image, p->image, p->x, p->y);
+	int		x;
+	int		y;
+
+	x = 0;
+	while (x < image->width)
+	{
+		y = 0;
+		while (y < image->height)
+		{
+			put_pixel(image, x, y, calc_color(color, get_pixel(image, x, y)));
+			y ++;
+		}
+		x ++;
+	}
+}
+
+static UINT	calc_color(UINT color1, UINT color2)
+{
+	UINT	calc;
+	UINT	tmp;
+
+	tmp = get_alpha(color1) + get_alpha(color2);
+	if (tmp > 255)
+		tmp = 255;
+	calc = tmp;
+	calc <<= 8;
+	tmp = get_red(color1) + get_red(color2);
+	if (tmp > 255)
+		tmp = 255;
+	calc += tmp;
+	calc <<= 8;
+	tmp = get_green(color1) + get_green(color2);
+	if (tmp > 255)
+		tmp = 255;
+	calc += tmp;
+	calc <<= 8;
+	tmp = get_blue(color1) + get_blue(color2);
+	if (tmp > 255)
+		tmp = 255;
+	calc += tmp;
+	return (calc);
 }

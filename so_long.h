@@ -36,6 +36,7 @@
 # define NOEVENT_MASK	0
 
 # define TITLE			"42_so_long"
+# define MOVE_STR		"Move Count : "
 
 # define W				119
 # define A				97
@@ -76,10 +77,14 @@
 # define WINCREATE		7
 # define DELETE_ALL		8
 
-# define STRX			10
-# define STRY			30
 # define STRCOLOR		0x00000000
 # define STREDGECOLOR	0x00FFFFFF
+
+# define FAILURE_COLOR	0x00500000
+
+# define PLAYING		0
+# define CLEAR			1
+# define FAILURE		2
 
 # ifndef ISBONUS
 #  define ISBONUS		0
@@ -111,8 +116,10 @@ typedef struct s_frame
 	size_t		width;
 	size_t		height;
 	int			**list;
+	t_image		**images;
 	t_player	*player;
-}			t_frame;
+	int			status;
+}				t_frame;
 
 typedef struct s_list
 {
@@ -142,14 +149,13 @@ int			repaint(t_frame *frame);
 void		print_extra(t_frame *frame, char *str);
 t_image		*create_image(t_frame *f, char *path);
 t_image		*create_empty_image(t_frame *f, size_t width, size_t height);
-t_player	*create_player(int **map);
+t_player	*create_player(t_image *image, int **map);
 void		delete_image(t_frame *frame, t_image *image);
 void		clear_list(int	***lst);
 void		images_destroy(t_frame *frame);
 int			images_create(t_frame *frame);
-t_image		*get_image(int index);
 void		draw_image(t_image *dst, t_image *src, int x, int y);
-void		draw_player(t_image *image, t_player *player);
+void		add_color_all(t_image *image, UINT color);
 void		put_pixel(t_image *image, int x, int y, UINT color);
 UINT		get_pixel(t_image *image, int x, int y);
 UCHAR		get_alpha(UINT argb);

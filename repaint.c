@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-static void	clear_background(void);
+static void	clear_background(t_frame *frame);
 
 int	repaint(t_frame *f)
 {
@@ -20,8 +20,8 @@ int	repaint(t_frame *f)
 	int		i;
 	int		j;
 
-	clear_background();
-	background = get_image(BACKGROUND);
+	clear_background(f);
+	background = f->images[BACKGROUND];
 	i = 0;
 	while (i < (int)(f->width))
 	{
@@ -29,31 +29,30 @@ int	repaint(t_frame *f)
 		while (j < (int)(f->height))
 		{
 			if ((f->list)[j][i] != ROAD)
-				draw_image(background, get_image((f->list)[j][i]), i, j);
+				draw_image(background, f->images[(f->list)[j][i]], i, j);
 			j ++;
 		}
 		i ++;
 	}
 	draw_image(background, f->player->image, f->player->x, f->player->y);
-	mlx_put_image_to_window(f->mlx, f->win, background->image, 0, 0);
 	print_extra(f, get_count());
 	return (0);
 }
 
-static void	clear_background(void)
+static void	clear_background(t_frame *frame)
 {
 	t_image	*background;
 	int		i;
 	int		j;
 
-	background = get_image(BACKGROUND);
+	background = frame->images[BACKGROUND];
 	i = 0;
 	while (i < background->width / WIDTH)
 	{
 		j = 0;
 		while (j < background->height / HEIGHT)
 		{
-			draw_image(background, get_image(ROAD), i, j);
+			draw_image(background, frame->images[ROAD], i, j);
 			j ++;
 		}
 	i ++;

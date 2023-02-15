@@ -71,7 +71,7 @@ static void	search_player_point(int **map, int *x, int *y)
 	*y = -1;
 }
 
-t_player	*create_player(int **map)
+t_player	*create_player(t_image *image, int **map)
 {
 	t_player	*out;
 	int			x;
@@ -88,7 +88,7 @@ t_player	*create_player(int **map)
 		free(out);
 		return (NULL);
 	}
-	out->image = get_image(PLAYER);
+	out->image = image;
 	out->x = x;
 	out->y = y;
 	out->move_count = 0;

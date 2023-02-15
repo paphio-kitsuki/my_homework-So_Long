@@ -47,12 +47,13 @@ static t_frame	*setup_frame(char *address)
 		error(NOTPOSSIBLE, frame);
 	if (images_create(frame) < 0)
 		error(IMAGECREATE, frame);
-	frame->player = create_player(frame->list);
+	frame->player = create_player(frame->images[PLAYER], frame->list);
 	if (frame->player == NULL)
 		error(PLAYERCREATE, frame);
 	width = frame->width * WIDTH;
 	height = frame->height * HEIGHT;
 	frame->win = mlx_new_window(frame->mlx, width, height, TITLE);
+	frame->status = PLAYING;
 	return (frame);
 }
 

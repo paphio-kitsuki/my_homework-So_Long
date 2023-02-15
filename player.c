@@ -12,10 +12,14 @@
 
 #include "so_long.h"
 
+static void	judge(t_frame *frame);
+
 int	move(t_frame *frame, int x, int y)
 {
 	t_player	*player;
 
+	if (frame == NULL || frame->status != PLAYING)
+		return (0);
 	player = frame->player;
 	player->x += x;
 	player->y += y;
@@ -47,19 +51,26 @@ void	action(t_frame *frame)
 	{
 		if (ISBONUS == 0)
 		{
-			ft_putstr("Move Count : ", STDOUT);
+			ft_putstr(MOVE_STR, STDOUT);
 			ft_putstrln(tmp, STDOUT);
 			free(tmp);
 		}
 		else
 			set_count(tmp);
 	}
+	judge(frame);
+	repaint(frame);
+}
+
+static void	judge(t_frame *frame)
+{
 	if ((frame->list)[frame->player->y][frame->player->x] == COLLECTION)
 		(frame->list)[frame->player->y][frame->player->x] = ROAD;
+	else if ((frame->list)[frame->player->y][frame->player->x] == ENEMY)
+		frame->status = FAILURE;
 	else if ((frame->list)[frame->player->y][frame->player->x] == GOAL)
 	{
 		if (search(frame->list, COLLECTION) == 0)
-			exit_func(frame);
+			frame->status = CLEAR;
 	}
-	repaint(frame);
 }
