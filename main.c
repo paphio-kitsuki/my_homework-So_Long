@@ -88,8 +88,7 @@ static void	set_window(t_frame *frame)
 	int	width;
 	int	height;
 
-	width = get_framewidth(frame);
-	height = get_frameheight(frame);
+	get_framesize(frame, &width, &height);
 	frame->win = mlx_new_window(frame->mlx, width, height, TITLE);
 	if (frame->win == NULL)
 		error(WINCREATE, frame);

@@ -12,28 +12,17 @@
 
 #include "so_long.h"
 
-int	get_framewidth(t_frame *frame)
+void	get_framesize(t_frame *frame, int *width, int *height)
 {
-	int	width;
-
-	mlx_get_screen_size(frame->mlx, &width, NULL);
-	if (frame->width > width / WIDTH)
-		width = width / WIDTH;
+	mlx_get_screen_size(frame->mlx, width, height);
+	if (frame->width > *width / WIDTH)
+		*width = *width / WIDTH;
 	else
-		width = frame->width;
-	width *= WIDTH;
-	return (width);
-}
-
-int	get_frameheight(t_frame *frame)
-{
-	int	height;
-
-	mlx_get_screen_size(frame->mlx, NULL, &height);
-	if (frame->height > height / HEIGHT)
-		height = height / HEIGHT;
+		*width = frame->width;
+	*width *= WIDTH;
+	if (frame->height > *height / HEIGHT)
+		*height = *height / HEIGHT;
 	else
-		height = frame->height;
-	height *= HEIGHT;
-	return (height);
+		*height = frame->height;
+	*height *= HEIGHT;
 }
