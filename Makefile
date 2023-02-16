@@ -26,10 +26,10 @@ endif
 
 all: ${NAME}
 
-${NAME}: ${MLX} ${OBJS}
+${NAME}: ${MLX_DIR}/${MLX} ${OBJS}
 	${CC} ${OBJS} ${ADDFLGS} -o $@
 
-${MLX}:
+${MLX_DIR}/${MLX}:
 	cd ${PWD}/${MLX_DIR} && ${MAKE}
 
 clean:
