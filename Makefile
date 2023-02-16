@@ -1,5 +1,6 @@
 NAME	= so_long
-MLX_DIR	= mlx_linux
+MLX_DIR	= mlx
+MLX		= libmlx.a
 MAN_SRC = time_man.c
 MAN_OBJ	= $(MAN_SRC:.c=.o)
 BNS_SRC = time_bonus.c
@@ -8,28 +9,30 @@ SRCS	= color.c create.c delete.c draw.c error.c ft_itoa.c ft_lstclear.c ft_lstne
 OBJS	= $(SRCS:.c=.o)
 RM		= rm -f
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -L$(PWD)/$(MLX_DIR) -lmlx -lXext -lX11
+CFLAGS	= -Wall -Wextra -Werror
+ADDFLGS	= -L$(PWD)/$(MLX_DIR) -lmlx -lXext -lX11
 ifneq ($(OS),Windows_NT)
  ifneq ($(shell uname),Linux)
-  MLX_DIR	= mlx_mac
-  CFLAGS	= -Wall -Wextra -Werror -L$(PWD)/$(MLX_DIR) -lmlx -L/usr/X11R6/lib -lX11 -lXext -framework OpenGL -framework AppKit -D ISMAC
+  ADDFLGS	= -L$(PWD)/$(MLX_DIR) -lmlx -L/usr/X11R6/lib -lX11 -lXext -framework OpenGL -framework AppKit
  endif
 endif
 
 ifdef WITH_BONUS
- CFLAGS += -lrt -D ISBONUS=1
+ CFLAGS += -D ISBONUS=1
  SRCS += $(BNS_SRC)
- OBJS += $(BNS_OBJ)
+ #OBJS += $(BNS_OBJ)
 else
  SRCS += $(MAN_SRC)
- OBJS += $(MAN_OBJ)
+ #OBJS += $(MAN_OBJ)
 endif
 
 all: ${NAME}
 
-${NAME}: ${OBJS}
+${NAME}: ${MLX} ${OBJS}
+	${CC} ${OBJS} ${ADDFLGS} -o $@
+
+${MLX}:
 	cd ${PWD}/${MLX_DIR} && ${MAKE}
-	${CC} $^ ${CFLAGS} -o $@
 
 clean:
 	${RM} ${OBJS} ${BNS_OBJ}

@@ -6,19 +6,14 @@
 /*   By: kitsuki <kitsuki@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:08:23 by kitsuki           #+#    #+#             */
-/*   Updated: 2023/02/11 16:08:23 by kitsuki          ###   ########.fr       */
+/*   Updated: 2023/02/16 19:20:59 by kitsuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# ifdef ISMAC
-#  include "mlx_mac/mlx.h"
-# else
-#  include "mlx_linux/mlx.h"
-# endif
-
+# include "mlx/mlx.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>

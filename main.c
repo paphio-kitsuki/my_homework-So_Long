@@ -6,7 +6,7 @@
 /*   By: kitsuki <kitsuki@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:09:04 by kitsuki           #+#    #+#             */
-/*   Updated: 2023/02/12 02:43:10 by kitsuki          ###   ########.fr       */
+/*   Updated: 2023/02/16 19:24:47 by kitsuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ static t_frame	*setup_frame(char *address)
 	set_window(frame);
 	frame->status = PLAYING;
 	frame->filepath = address;
-	set_count(ft_itoa(0));
+	if (ISBONUS > 0)
+		set_count(ft_itoa(0));
 	return (frame);
 }
 

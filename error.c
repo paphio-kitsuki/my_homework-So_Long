@@ -6,7 +6,7 @@
 /*   By: kitsuki <kitsuki@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 12:40:29 by kitsuki           #+#    #+#             */
-/*   Updated: 2023/02/14 12:40:29 by kitsuki          ###   ########.fr       */
+/*   Updated: 2023/02/16 19:16:39 by kitsuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ void	case_of_clear(int index, t_frame *frame)
 	if (index >= DELETE_ALL)
 		mlx_destroy_window(frame->mlx, frame->win);
 	if (index >= FILECASE)
+	{
 		mlx_destroy_display(frame->mlx);
+		free(frame->mlx);
+	}
 	if (index >= MLXCREATE)
 		free(frame);
 }
