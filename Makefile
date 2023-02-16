@@ -20,10 +20,8 @@ endif
 ifdef WITH_BONUS
  CFLAGS += -D ISBONUS=1
  SRCS += $(BNS_SRC)
- #OBJS += $(BNS_OBJ)
 else
  SRCS += $(MAN_SRC)
- #OBJS += $(MAN_OBJ)
 endif
 
 all: ${NAME}
