@@ -30,7 +30,7 @@ ${NAME}: ${MLX_DIR}/${MLX} ${OBJS}
 	${CC} ${CFLAGS} ${OBJS} ${ADDFLGS} -o $@
 
 ${MLX_DIR}/${MLX}:
-	${MAKE} -C $${MLX_DIR}
+	${MAKE} -C ${MLX_DIR}
 
 clean:
 	${RM} ${OBJS} ${MAN_OBJ} ${BNS_OBJ}
