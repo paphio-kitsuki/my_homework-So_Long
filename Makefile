@@ -10,10 +10,10 @@ OBJS	= $(SRCS:.c=.o)
 RM		= rm -f
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
-ADDFLGS	= -L$(PWD)/$(MLX_DIR) -lmlx -lXext -lX11
+ADDFLGS	= -L./$(MLX_DIR) -lmlx -lXext -lX11
 ifneq ($(OS),Windows_NT)
  ifneq ($(shell uname),Linux)
-  ADDFLGS	= -L$(PWD)/$(MLX_DIR) -lmlx -L/usr/X11R6/lib -lX11 -lXext -framework OpenGL -framework AppKit
+  ADDFLGS	= -L./$(MLX_DIR) -lmlx -L/usr/X11/lib -lX11 -lXext -framework OpenGL -framework AppKit
  endif
 endif
 
@@ -27,15 +27,14 @@ endif
 all: ${NAME}
 
 ${NAME}: ${MLX_DIR}/${MLX} ${OBJS}
-	${CC} ${OBJS} ${ADDFLGS} -o $@
+	${CC} ${CFLAGS} ${OBJS} ${ADDFLGS} -o $@
 
 ${MLX_DIR}/${MLX}:
-	cd ${PWD}/${MLX_DIR} && ${MAKE}
+	${MAKE} -C $${MLX_DIR}
 
 clean:
-	${RM} ${OBJS} ${BNS_OBJ}
-	cd ${PWD}/${MLX_DIR} && ${MAKE} $@
-	cd ${PWD}
+	${RM} ${OBJS} ${MAN_OBJ} ${BNS_OBJ}
+	${MAKE} -C ${MLX_DIR} $@
 
 fclean: clean
 	${RM} ${NAME}

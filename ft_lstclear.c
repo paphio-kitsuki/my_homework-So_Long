@@ -54,6 +54,7 @@ void	ft_lstfix(t_list **lst)
 
 	if (lst == NULL || *lst == NULL)
 		return ;
+	ft_lstiter(*lst);
 	while (*lst != NULL && *((*lst)->str) == '\0')
 	{
 		tmp = (*lst)->next;
@@ -74,5 +75,4 @@ void	ft_lstfix(t_list **lst)
 		ft_lstdelone(tmp->next);
 		tmp->next = NULL;
 	}
-	ft_lstiter(*lst);
 }
